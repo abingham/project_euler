@@ -1,11 +1,14 @@
+(declare primes)
+
 (defn is_prime [x]
   (cond (= 0 x) false
         (= 1 x) false
         (= 2 x) true
         (some 
          #(zero? (mod x %))  
-         (take-while (partial >= (Math/sqrt x)) 
-                     (rest (rest (range))))) false
+         (take-while 
+          (partial >= (Math/sqrt x)) 
+          primes)) false
         :else true))
 
 (def primes
