@@ -1,0 +1,8 @@
+import glob
+
+env = Environment(TOOLS=['default', 
+                         'scons_haskell'])
+
+env.HaskellObject(source=['EulerUtil.hs'])
+for fname in glob.glob('euler_*.hs'):
+    env.HaskellMake(source=[fname])
