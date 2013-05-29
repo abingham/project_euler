@@ -4,7 +4,8 @@
             [project-euler.problem2]
             [project-euler.problem3]
             [project-euler.problem4]
-            [project-euler.problem5]))
+            [project-euler.problem5]
+            [project-euler.problem6]))
 
 (deftest problem1
   (testing "Project Euler problem 1"
@@ -25,3 +26,7 @@
 (deftest problem5
   (testing "Project Euler problem 5"
     (is (= 232792560 (project-euler.problem5/run)))))
+
+(deftest problem6
+  (testing "Project Euler problem 6"
+    (is (= 25164150 (project-euler.problem6/run)))))

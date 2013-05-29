@@ -27,3 +27,8 @@
 
 (defn palindrome? [x]
   (= x (clojure.string/reverse x)))
+
+(defn expt [b p]
+  (reduce * (repeat p b)))
+
+(def sum (partial reduce +))

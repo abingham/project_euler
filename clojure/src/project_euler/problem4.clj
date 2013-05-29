@@ -12,3 +12,4 @@
   (apply max 
    (filter #(util/palindrome? (str %))
            (unique-pair-products (range 100 1000) (range 100 1000)))))
+
