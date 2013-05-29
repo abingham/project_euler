@@ -24,3 +24,6 @@
      (cond (= x 1) '()
            (zero? (mod x (first cands))) (cons (first cands) (prime_factors (/ x (first cands))))
            :else (prime_factors x (rest cands)))))
+
+(defn palindrome? [x]
+  (= x (clojure.string/reverse x)))
