@@ -32,3 +32,9 @@
   (reduce * (repeat p b)))
 
 (def sum (partial reduce +))
+
+(defn digits [x]
+  (if (< x 10) x
+      (let [q (unchecked-divide-int x 10)
+            r (mod x 10)]
+        (lazy-seq (r (digits q))))))
