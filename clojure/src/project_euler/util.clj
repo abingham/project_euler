@@ -1,9 +1,15 @@
 (ns project-euler.util)
 
-(def fibs
-  ((fn rfib [a b] 
-     (lazy-seq (cons a (rfib b (+ a b)))))
-   1 2))
+;; (def fibs
+;;   ((fn rfib [a b] 
+;;      (lazy-seq (cons a (rfib b (+ a b)))))
+;;    1 2))
+
+; Taken from clojure-contrib
+(defn fibs
+  "Returns a lazy sequence of all the Fibonacci numbers."
+  []
+  (map first (iterate (fn [[a b]] [b (+ a b)]) [0 1])))
 
 (defn is_prime [x]
   (cond (= 0 x) false
@@ -12,11 +18,27 @@
         (some 
          #(zero? (mod x %))  
          (take-while (partial >= (Math/sqrt x)) 
-                     (rest (rest (range))))) false
+                     (drop 2 (range)))) false
         :else true))
 
+;(def primes
+;  (filter is_prime (range)))
+
+; Taken from old clojure-contrib
 (def primes
-  (filter is_prime (range)))
+  (concat
+   [2 3 5 7]
+   (lazy-seq
+    (let [primes-from
+          (fn primes-from [n [f & r]]
+            (if (some #(zero? (rem n %))
+                      (take-while #(<= (* % %) n) primes))
+              (recur (+ n f) r)
+              (lazy-seq (cons n (primes-from (+ n f) r)))))
+          wheel (cycle [2 4 2 4 6 2 6 4 2 4 6 6 2 6 4 2
+                        6 4 6 8 4 2 4 2 4 8 6 4 6 2 4 6
+                        2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
+      (primes-from 11 wheel)))))
 
 (defn prime_factors 
   ([x] (prime_factors x primes))
