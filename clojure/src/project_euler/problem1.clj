@@ -1,3 +1,5 @@
+(ns project-euler.problem1)
+
 (defn- threesAndFives [max]
   (filter 
    (fn [x]
@@ -6,4 +8,5 @@
            :else false))
    (range 1 max)))
 
-(println (reduce + (threesAndFives 1000)))
+(defn run []
+  (reduce + (threesAndFives 1000)))
