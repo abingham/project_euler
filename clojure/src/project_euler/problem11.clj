@@ -46,5 +46,10 @@
 (defn vert [g]
   (horiz (transpose g)))
 
+(defn shift [x]
+  (cond
+   (empty? x) x
+   :else (reverse (cons (first x) (reverse (rest x))))))
+
 (defn run []
   (horiz grid))
