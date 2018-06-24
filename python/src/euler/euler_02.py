@@ -9,7 +9,7 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 from itertools import takewhile
 
 from euler.util import is_even
-from sequences import fibonacci
+from euler.sequences import fibonacci
 
 
 def main():
