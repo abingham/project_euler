@@ -18,7 +18,7 @@ class Matrix:
             rval += '\n'
 
         return rval
-    
+
     rows = property(lambda x: len(x.data))
     cols = property(lambda x: x._cols)
 
@@ -54,13 +54,13 @@ class SparseMatrix:
     cols = property(lambda x : x._cols)
 
 def test_template(m):
-    print m.get(1,2)
+    # print m.get(1,2)
     m.set(1,2,3)
-    print m.get(1,2)
-    print m.rows, m.cols
+    # print m.get(1,2)
+    # print m.rows, m.cols
 
     try:
-        print m.get(42,69)
+        pass # print m.get(42,69)
     except IndexError:
         pass
 

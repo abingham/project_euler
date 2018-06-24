@@ -11,7 +11,6 @@ for p in range(120, 1001):
     if sum > max_solutions:
         max_solutions = sum
         max_size = p
-        print max_size,'->',max_solutions
+        # print max_size,'->',max_solutions
 
-print 'MAX:',max_size,'->',max_solutions
-    
+# print 'MAX:',max_size,'->',max_solutions

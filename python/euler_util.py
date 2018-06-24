@@ -1,5 +1,11 @@
 import bisect, cmath, math, operator, time
 
+
+def is_even(x):
+    """Determine if an integer is even."""
+    return x % 2 == 0
+
+
 def bsearch(l,x,comp=None):
     '''
     Searches a sorted list for x. If it's found, return
@@ -42,7 +48,7 @@ class GenFinder:
         if self.data[-1] < x:
             return self.find_new(x)
         else:
-            return bsearch(self.data, x)        
+            return bsearch(self.data, x)
 
     def find_new(self, x):
         while self.data[-1] < x:
@@ -83,7 +89,7 @@ def undigits(digits):
 
 def length(x):
     '''
-    returns the length in decimal digits of a number. Note that this returns 1 if 
+    returns the length in decimal digits of a number. Note that this returns 1 if
     x is zero.
     '''
     if x == 0:
@@ -131,11 +137,11 @@ def primes(up_to):
     candidates = [True for i in xrange(up_to + 1)]
     candidates[0] = False
     candidates[1] = False
-    
+
     i = 0
     l = len(candidates)
     while i < l:
-        if not candidates[i]: 
+        if not candidates[i]:
             i += 1
             continue
 
@@ -231,7 +237,7 @@ def permutations(tokens, size=None):
     '''
     if size is None:
         size = len(tokens)
-    
+
     if size > 0:
         for i in xrange(len(tokens)):
             tokens[0],tokens[i] = tokens[i],tokens[0]
@@ -292,13 +298,13 @@ def palindrome(s):
     for i in xrange(len(s) / 2):
         if s[i] != s[-1 * (i + 1)]:
             return False
-    return True    
+    return True
 
 def fib():
     '''
     Generates fibonacci numbers. [1,1,2,3,...]
     Yields valus in the form (<index>, <value>). So the
-    first yield is (1,1), second is (2,1), then (3,2), (4,3), 
+    first yield is (1,1), second is (2,1), then (3,2), (4,3),
     and so on...
     '''
     prev = 1
@@ -396,12 +402,12 @@ def accumulate(l, f, prev):
 def quadratic_roots(a,b,c):
     '''
     returns (root1, root2)
-    
+
     '''
     c1 = -1.0 * b
     c2 = cmath.sqrt(math.pow(b, 2) - 4 * a * c)
     c3 = 2 * a
-    
+
     return (c1 + c2) / c3, (c1 - c2) / c3
 
 def sqrt_continued_fraction(a):
@@ -469,12 +475,12 @@ def trace(meth):
     '''Simple function tracing decorator'''
     def new_meth(*args):
         rval = meth(*args)
-        print meth.__name__,args,'->',rval
+        # print (meth.__name__,args,'->',rval)
         return rval
     return new_meth
 
 def main():
-    print [p for p in opermutations([0,1,2,3])]
+    pass # print ([p for p in opermutations([0,1,2,3])])
 
 if __name__ == '__main__':
     main()

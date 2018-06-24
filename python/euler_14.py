@@ -30,10 +30,10 @@ def full_problem():
         if cl > max:
             max = cl
             val = i
-            
-    print max,val
+
+    print (max,val)
 
 def pretend():
-    print collatz_length(13)
+    print (collatz_length(13))
 
 full_problem()

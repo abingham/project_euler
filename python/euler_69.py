@@ -9,18 +9,18 @@ def run(n):
 
     for i in range(2,n + 1):
         phi = eu.eulers_totient(i, primes)
-        rslt = float(i) / phi        
+        rslt = float(i) / phi
 
         if rslt > max_quotient:
             max_quotient = rslt
             max_n = i
 
-    print max_n
+    # print max_n
 
 def test():
     for i in range(2,11):
         et = eu.eulers_totient(i)
-        print i, et, float(i) / et
+        # print i, et, float(i) / et
 
 def main():
     run(int(sys.argv[1]))

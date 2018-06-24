@@ -1,7 +1,7 @@
 def solve(target, so_far = 0, max = None):
     if max is None:
         max = target - 1
-        
+
     count = 0
 
     for i in xrange(1, max + 1):
@@ -13,12 +13,12 @@ def solve(target, so_far = 0, max = None):
             break
         else:
             count += solve(target, sum, i)
-            
+
     return count
-        
+
 if __name__ == '__main__':
     last = 1
     for i in range(2, 20):
         new = solve(i)
-        print new / 2, new
+        pass # print new / 2, new
         last = new

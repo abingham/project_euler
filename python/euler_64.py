@@ -22,4 +22,4 @@ def run():
     return sum
 
 test()
-print run()
+pass # §print run()

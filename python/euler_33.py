@@ -12,7 +12,7 @@ def alt(x):
 def curious(a,b):
     if a % 10 == 0 and b % 10 == 0:
         return False
-    
+
     a_digits = euler_util.digits(a)
     b_digits = euler_util.digits(b)
     for aidx in range(2):
@@ -27,6 +27,5 @@ for i in range(10,100):
     for j in range(i + 1, 100):
         if curious(i,j):
             vals.append((i,j))
-print reduce(lambda x,y: x * y, [a for (a,b) in vals], 1)
-print reduce(lambda x,y: x * y, [b for (a,b) in vals], 1) 
-
+# print reduce(lambda x,y: x * y, [a for (a,b) in vals], 1)
+# print reduce(lambda x,y: x * y, [b for (a,b) in vals], 1)

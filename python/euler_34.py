@@ -13,12 +13,12 @@ def run():
     for i in range(1,10**7):
         if curious(i):
             vals.append(i)
-    print sum(vals)
+    # print sum(vals)
 
 def test():
     for i in range(1,10):
-        print i
+        # print i
         if eu.fact(9) * i < 10**i:
-            print 'hmmm'
-    
+            pass # print 'hmmm'
+
 run()

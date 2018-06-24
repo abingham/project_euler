@@ -1,4 +1,4 @@
-# for x^2 - Dy^2 = 1 (quadratic Diophantine, Pell's equation), 
+# for x^2 - Dy^2 = 1 (quadratic Diophantine, Pell's equation),
 # minimize x for given values of D
 
 import euler_util as eu
@@ -18,7 +18,7 @@ def pell_min_x(d):
     x,y = eu.convergent(cf[:1])
     if solves_pell(x,y,d):
         return (x,y)
-    
+
     while True:
         for i in range(len(cf) - 1):
             x,y = eu.convergent(cf[:-1 * (tail_len - i)])
@@ -28,7 +28,7 @@ def pell_min_x(d):
 
 def max_x(max_d):
     '''
-    for all d <= max_d, this finds the d for which the 
+    for all d <= max_d, this finds the d for which the
     solution to Pell (x,y) minimizing x is maximal in x.
     '''
 
@@ -51,5 +51,4 @@ def run():
     return max_x(1000)
 
 test()
-print run()        
-    
+# print run()

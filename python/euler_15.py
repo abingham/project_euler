@@ -13,9 +13,6 @@ def pascals_triangle(depth):
     return rval
 
 pvals = pascals_triangle(41)
-print pvals[19]
-print pvals[20]
-print pvals[21]
-
-
-
+print (pvals[19])
+print (pvals[20])
+print (pvals[21])

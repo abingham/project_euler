@@ -25,16 +25,16 @@ def run():
                 last_prime = primes.next()
             if current == last_prime:
                 prime_count = op.iadd(prime_count, 1)
-            
+
         current = op.add(current, incr)
-        
+
         diag_total = op.iadd(diag_total, 4)
-        
+
         perc = op.div(float(prime_count), diag_total)
 
         # print ring, side_length(ring), last_prime, diag_total, perc
-        
+
         if op.lt(perc, 0.1):
             return side_length(ring)
 
-print run()
+# print run()

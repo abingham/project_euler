@@ -23,4 +23,4 @@ def run():
     return min
 
 if __name__ == '__main__':
-    print run()
+    pass # print run()

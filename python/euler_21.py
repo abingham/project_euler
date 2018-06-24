@@ -6,7 +6,7 @@
 import euler_util
 
 sums = [0] + [sum(euler_util.proper_divisors(i)) for i in range(1,10000)]
-    
+
 amicable = set()
 for a in range(1,10000):
     b = sums[a]
@@ -21,4 +21,4 @@ for a in range(1,10000):
         if s == a:
             amicable.add(a)
 
-print sum(amicable)
+# print sum(amicable)

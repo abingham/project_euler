@@ -7,7 +7,7 @@ def twice_squares():
 def find_sum(x, ts, primes):
     ts.find(x)
     primes.find(x)
-    
+
     for tsidx in range(len(ts)):
         curr_ts = ts[tsidx]
         if curr_ts >= x:
@@ -15,7 +15,7 @@ def find_sum(x, ts, primes):
         diff = x - curr_ts
         if primes.find(diff) != -1:
             return True
-    
+
     return False
 
 def run():
@@ -27,7 +27,7 @@ def run():
             continue
 
         if not find_sum(i, ts, primes):
-            print i
+            # print i
             return
 
 run()

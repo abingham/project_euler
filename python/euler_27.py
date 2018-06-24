@@ -32,5 +32,5 @@ def run():
     return (max_a, max_b, max_count)
 
 result = run()
-print result
-print result[0] * result[1]
+# print result
+# print result[0] * result[1]

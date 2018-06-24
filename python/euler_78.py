@@ -26,7 +26,7 @@ def partitions(n):
 
         if b < 0 and c < 0:
             break
-        
+
         if b >= 0:
             sum += a * partitions(b)
         if c >= 0:
@@ -57,4 +57,4 @@ def run():
 
 if __name__ == '__main__':
     # test()
-    print run()
+    pass # print run()

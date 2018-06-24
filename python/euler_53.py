@@ -23,10 +23,9 @@ def run():
                 sum += 1
         except StopIteration:
             pass
-    print sum
+    # print sum
 
 def test():
-    print combos(5,3)
+    # print combos(5,3)
 
 run()
-    

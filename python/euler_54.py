@@ -112,7 +112,7 @@ class Card:
 
     def __lt__(self, other):
         return self.value < other.value
-    
+
     def __repr__(self):
         return 'Card<%s, %s>' % (self.value, self.suit)
 
@@ -120,7 +120,7 @@ class Hand:
     def __init__(self, cards):
         self.cards = cards[:]
         self.cards.sort()
-        
+
         self._init_counts()
 
         self.score, self.discriminator = self._get_score()
@@ -167,10 +167,10 @@ def run(fname):
         cards = l.split()
         hand1 = Hand([Card(values[c[0]], c[1]) for c in cards[:5]])
         hand2 = Hand([Card(values[c[0]], c[1]) for c in cards[5:]])
-        
+
         if hand1 < hand2 and hand2 < hand1:
-            print hand1
-            print hand2
+            #print hand1
+            #print hand2
 
         if hand2 < hand1 and not hand1 < hand2:
             wins += 1
@@ -189,56 +189,56 @@ def test():
                Card(6, 'H'),
                Card(8, 'C')]),
          HIGH_CARD),                        # expected score
-        ('high_k', 
+        ('high_k',
          Hand([Card(1, 'C'),
                Card(2, 'D'),
                Card(3, 'S'),
                Card(6, 'H'),
                Card(12, 'C')]),
          HIGH_CARD),
-        ('pair_4', 
+        ('pair_4',
          Hand([Card(1, 'C'),
                Card(4, 'D'),
                Card(4, 'S'),
                Card(6, 'H'),
                Card(12, 'C')]),
          PAIR),
-        ('pair_9', 
+        ('pair_9',
          Hand([Card(1, 'C'),
                Card(4, 'D'),
                Card(9, 'S'),
                Card(6, 'H'),
                Card(9, 'C')]),
          PAIR),
-        ('two_pair_5_7', 
+        ('two_pair_5_7',
          Hand([Card(1, 'C'),
                Card(5, 'D'),
                Card(7, 'S'),
                Card(5, 'H'),
                Card(7, 'C')]),
          TWO_PAIRS),
-        ('two_pair_4_q', 
+        ('two_pair_4_q',
          Hand([Card(4, 'C'),
                Card(9, 'D'),
                Card(11, 'S'),
                Card(11, 'H'),
                Card(4, 'C')]),
          TWO_PAIRS),
-        ('three_5', 
+        ('three_5',
          Hand([Card(5, 'C'),
                Card(9, 'D'),
                Card(5, 'S'),
                Card(11, 'H'),
                Card(5, 'C')]),
          THREE_OF_A_KIND),
-        ('three_6', 
+        ('three_6',
          Hand([Card(6, 'C'),
                Card(6, 'D'),
                Card(6, 'S'),
                Card(11, 'H'),
                Card(5, 'C')]),
          THREE_OF_A_KIND),
-        ('straight_3', 
+        ('straight_3',
          Hand([Card(3, 'C'),
                Card(7, 'D'),
                Card(4, 'S'),
@@ -320,18 +320,19 @@ def test():
     for i in xrange(len(hands)):
         ni,hi,ei = hands[i]
         if not hi.score == ei:
-            print ni,'expected score is no actual score: %s != %s'%(ei,hi.score)
-            print hi
+            # print ni,'expected score is no actual score: %s != %s'%(ei,hi.score)
+            # print hi
             continue
         if hi < hi:
-            print ni,'should not be less than itself!'
+            # print ni,'should not be less than itself!'
         for j in xrange(i + 1, len(hands)):
             nj,hj,ej = hands[j]
             if not hi < hj:
-                print ni,'should be less than',nj
-                print hi
-                print hj
-                print ' '
+                #print ni,'should be less than',nj
+                #print hi
+                #print hj
+                #print ' '
+                pass
 
-print run(sys.argv[1])
+# print run(sys.argv[1])
 # test()

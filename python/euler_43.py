@@ -16,12 +16,12 @@ def run():
         if c[0] == 0:
             continue
         if curious(c, primes):
-            print c
+            # print c
             sum += euler_util.undigits(c)
-    print sum
+    # print sum
 
-def test():    
+def test():
     primes = [p for p in euler_util.primes(17)]
-    print curious(euler_util.digits(1406357289), primes)
+    # print curious(euler_util.digits(1406357289), primes)
 
 run()

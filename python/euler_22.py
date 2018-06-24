@@ -12,4 +12,4 @@ names.sort()
 score_sum = 0
 for i in range(len(names)):
     score_sum += ((i + 1) * letter_sum(names[i]))
-print score_sum
+# print score_sum

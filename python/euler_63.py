@@ -11,4 +11,4 @@ def run():
                 count += 1
     return count
 
-print run()
+pass # print run()

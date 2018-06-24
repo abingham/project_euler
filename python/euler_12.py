@@ -28,9 +28,9 @@ def count_divisors(val):
 def main():
     for t in triangles():
         num_div = count_divisors(t)
-        print t, num_div
+        print (t, num_div)
         if num_div > num_divisors:
-            print t
+            print (t)
             break
 
 if __name__ == '__main__':

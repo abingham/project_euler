@@ -10,4 +10,4 @@ sum = 0
 while f > 0:
     (f,m) = divmod(f, 10)
     sum += m
-print sum
+# print sum

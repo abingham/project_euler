@@ -26,7 +26,7 @@ def curious(x, primes):
             return False
 
     return True
-        
+
 def run():
     pgen = euler_util.gen_primes()
 
@@ -38,15 +38,15 @@ def run():
         prime = pgen.next()
         primes.append(prime)
         if curious(prime, primes):
-            print prime
+            # print prime
             results.append(prime)
 
-    print sum(results)
+    # print sum(results)
 
 def test():
     # 3797
     primes = [379,37,3,797,97,7]
     primes.sort()
-    print curious(3797, primes)
+    # print curious(3797, primes)
 
 run()

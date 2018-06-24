@@ -4,7 +4,7 @@ def run():
     t = euler_util.triangles()
     for i in range(285):
         t.next()
-        
+
     p = euler_util.pentagonals()
     curr_p = p.next()
 
@@ -13,7 +13,7 @@ def run():
 
     while True:
         curr_t = t.next()
-        
+
         while curr_p < curr_t:
             curr_p = p.next()
 
@@ -21,7 +21,7 @@ def run():
             curr_h = h.next()
 
         if curr_t == curr_h and curr_t == curr_p:
-            print curr_t
+            # print curr_t
             return
 
 run()

@@ -41,7 +41,7 @@ def to_text(val):
     (val,t) = divmod(val, 10)
     (val,h) = divmod(val, 10)
 
-    print h,t,o
+    print (h,t,o)
 
     rval = ''
 
@@ -58,7 +58,7 @@ def to_text(val):
             rval += '%s ' % tens[t]
         if o != 0:
             rval += '%s' % ones[o]
-        
+
 
     return rval
 
@@ -68,7 +68,6 @@ for i in range(1, 1001):
     sz = to_text(i)
     f.write('%s\n' % sz)
     sum += len(filter(lambda x: not str.isspace(x), sz))
-    
+
 f.close()
-print sum
-    
+print (sum)

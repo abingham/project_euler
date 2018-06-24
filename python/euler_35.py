@@ -23,15 +23,16 @@ def run():
     results = set()
     for i in range(1000000):
         if circular(i):
-            print i
+            # print i
             results.add(i)
-        
-    print len(results)
+
+    # print len(results)
 
 def test():
-    print is_prime(5)
-    print is_prime(13)
-    print is_prime(34)
-    print is_prime(100)
+    #print is_prime(5)
+    #print is_prime(13)
+    #print is_prime(34)
+    #print is_prime(100)
+    pass
 
 run()

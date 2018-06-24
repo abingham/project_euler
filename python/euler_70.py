@@ -17,9 +17,9 @@ def permutations(x,y):
 
 def run(tgt):
     primes = list(eu.primes(int(math.ceil(math.sqrt(tgt)) * 2)))
-    print 'primes generated'
+    # print 'primes generated'
 
-    print primes[-1]
+    # print primes[-1]
 
     min_ratio = None
     min_n = 0
@@ -33,7 +33,7 @@ def run(tgt):
             if n > tgt:
                 continue
             phi = (pi - 1) * (pj - 1)
-            
+
             if not permutations(n, phi):
                 continue
 
@@ -42,7 +42,7 @@ def run(tgt):
                 min_ratio = ratio
                 min_n = n
 
-    print min_n
+    #print min_n
 
 if __name__ == '__main__':
     run(10000000)

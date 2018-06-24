@@ -30,21 +30,21 @@ max_val = 0
 m = Matrix()
 for row in range(m.rows - 3):
     for col in range(m.cols - 3):
-        print row,col,max_val
+        print (row,col,max_val)
 
         # row
         val = reduce(lambda x,y: x * y, [m.val(row, col + i) for i in range(4)], 1)
-        if val > max_val: 
+        if val > max_val:
             max_val = val
-        
+
         # col
         val = reduce(lambda x,y: x * y, [m.val(row + i, col) for i in range(4)], 1)
-        if val > max_val: 
+        if val > max_val:
             max_val = val
 
         # diag \
         val = reduce(lambda x,y: x * y, [m.val(row + i, col + i) for i in range(4)], 1)
-        if val > max_val: 
+        if val > max_val:
             max_val = val
 
         # diag /
@@ -52,7 +52,4 @@ for row in range(m.rows - 3):
         if val > max_val:
             max_val = val
 
-print max_val
-                     
-
-
+print (max_val)

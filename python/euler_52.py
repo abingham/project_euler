@@ -15,7 +15,7 @@ def run():
                     base_digs = euler_util.digits(i)
                     base_digs.sort()
                     cache[i] = base_digs
-            
+
                 for x in range(2, 7):
                     val = x * i
                     try:
@@ -27,11 +27,11 @@ def run():
                     if not digs == base_digs:
                         raise Exc
 
-                print i
+                # print i
                 return
             except Exc:
                 pass
-                    
-            
+
+
 
 run()

@@ -14,10 +14,11 @@ def is_lychrel(x):
     return True
 
 def run():
-    return reduce(lambda x,y: x + 1 if is_lychrel(y) else x, range(1, 10000), 0) 
+    return reduce(lambda x,y: x + 1 if is_lychrel(y) else x, range(1, 10000), 0)
 
 def test():
-    print is_lychrel(349)
+    # print is_lychrel(349)
+    pass
 
-print run()
+# print run()
 #test()

@@ -9,7 +9,7 @@ def cycle_length(den):
             return len(history) - idx
         except:
             pass
-        
+
         history.append(num)
 
         (d,m) = divmod(num, den)
@@ -25,4 +25,4 @@ for i in range(1,1000):
         max_length = l
         max_idx = i
 
-print max_idx,max_length
+# print max_idx,max_length

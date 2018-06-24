@@ -40,4 +40,4 @@ def run():
     lattice = read_lattice('triangle.txt')
     return max_path(lattice)
 
-print run()
+# print run()

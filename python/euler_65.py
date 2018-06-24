@@ -5,7 +5,7 @@ import euler_util as eu
 def cf_e(i):
     if i == 0:
         return 2
-    
+
     i -= 1
 
     d,m = divmod(i,3)
@@ -30,13 +30,13 @@ def run():
     which_convergent = 100
     cf = [cf_e(i) for i in range(which_convergent)]
     b,c = convergent(cf)
-    print sum(eu.digits(b))
+    # print sum(eu.digits(b))
 
 def test():
     cf = []
     for i in range(0,10):
         cf.append(cf_e(i))
-        print i, convergent(cf)
+        # print i, convergent(cf)
 
 # test()
 run()

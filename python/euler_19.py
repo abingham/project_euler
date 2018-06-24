@@ -48,6 +48,4 @@ for y in range(1901,2001):
         curr_day += month_length(m, y)
         curr_day %= 7
 
-print count
-        
-        
+# print count

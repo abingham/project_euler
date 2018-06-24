@@ -31,6 +31,6 @@ def run():
 
         match = [i,j,k]
         match.sort()
-        print match
+        # print match
 
 run()

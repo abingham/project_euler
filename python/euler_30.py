@@ -5,8 +5,8 @@ def run():
     for i in range(1000000):
         if i == sum([d**5 for d in euler_util.digits(i)]):
             vals.append(i)
-    print vals
-    print sum(vals) - 1
+    # print vals
+    # print sum(vals) - 1
 
 def test():
     '''
@@ -15,7 +15,7 @@ def test():
     53144.1 * x < 10**x
     '''
     for x in range(1,100):
-        print x
+        # print x
         if 53144.1 < (10**x) / x:
             break
 

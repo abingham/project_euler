@@ -23,9 +23,10 @@ def searcher():
             for c in range(ord('a'), ord('z') + 1):
                 decoded = decode(data, [a,b,c])
                 if 'the' in decoded and 'and' in decoded:
-                    print '***',a,b,c,'***'
-                    print decoded
-                    print ''
+                    #print '***',a,b,c,'***'
+                    #print decoded
+                    #print ''
+                    pass
 
 def run():
     data = read_cipher('cipher.txt')
@@ -33,4 +34,4 @@ def run():
     decoded = decode(data, key)
     return sum([ord(d) for d in decoded])
 
-print run()
+# print run()

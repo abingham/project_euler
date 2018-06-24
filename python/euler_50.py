@@ -2,12 +2,12 @@ import euler_util
 
 def run():
     primes = [p for p in euler_util.primes(1000000)]
-    print "primes calculated"
+    # print "primes calculated"
 
-    sums = [0] + euler_util.accumulate(primes, 
-                                       lambda x,y:x+y, 
+    sums = [0] + euler_util.accumulate(primes,
+                                       lambda x,y:x+y,
                                        0)
-    print "sums calculated"
+    # §print "sums calculated"
 
     max_dist = 0
     max = 0
@@ -21,11 +21,11 @@ def run():
             if euler_util.bsearch(primes, diff) != -1:
                 max_dist = (j - i) + 1
                 max = diff
-                print max, max_dist
-    print "max =",max
+                # print max, max_dist
+    # print "max =",max
 
 def test():
     x = euler_util.accumulate([1,2,3], lambda x,y: x + y, 0)
-    print x
+    # print x
 
 run()

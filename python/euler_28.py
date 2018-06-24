@@ -8,4 +8,4 @@ for ring in range(1, 501):
         current += 2 * ring
         sum += current
 
-print sum
+# print sum

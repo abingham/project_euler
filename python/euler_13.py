@@ -122,4 +122,4 @@ for s in sums:
     vals.append(mod)
 vals.append(carry)
 vals.reverse()
-print ''.join(['%s' % d for d in vals[:10]])[:10]
+print (''.join(['%s' % d for d in vals[:10]])[:10])

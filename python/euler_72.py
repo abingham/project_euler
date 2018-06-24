@@ -11,8 +11,7 @@ def run(max):
     sum = 0
     for i in range(2, max + 1):
         sum += eu.eulers_totient(i)
-    print sum
+    # print sum
 
 if __name__ == '__main__':
     run(1000000)
-        

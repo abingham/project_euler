@@ -7,4 +7,4 @@ iter = euler_util.primes(target_guess)
 
 for i in range(9999):
     iter.next()
-print iter.next()
+# print iter.next()

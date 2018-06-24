@@ -12,11 +12,11 @@ def is_prime(x, primes):
             return False
 
     return True
-        
+
 
 def run():
     primes = [p for p in euler_util.primes(int(math.ceil(math.sqrt(987654321))))]
-    
+
     max = 0
     toks = []
     for i in [1,2,3,4,5,6,7,8,9]:
@@ -26,6 +26,6 @@ def run():
             if is_prime(x, primes) and x > max:
                 max = x
 
-    print max
+    # print max
 
 run()

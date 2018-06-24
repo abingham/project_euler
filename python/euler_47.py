@@ -7,9 +7,9 @@ def run():
         factors = [p for p in euler_util.prime_factors(i)]
         if len(factors) == 4:
             vals.append(i)
-            print vals
+            # print vals
             if len(vals) == 4:
-                print vals
+                # print vals
                 return
         else:
             vals = []

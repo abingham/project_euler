@@ -19,6 +19,6 @@ def run():
         if not ints[i]:
             sum += i
 
-    print sum
+    # print sum
 
 run()

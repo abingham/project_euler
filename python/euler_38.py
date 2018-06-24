@@ -18,9 +18,9 @@ for digits in euler_util.permutations(range(1,10), 4):
         elif len(digits) == 9:
             if complete(digits):
                 val = euler_util.undigits(digits)
-                print base_value,i,val
+                # print base_value,i,val
                 if val > max_val:
                     max_val = val
             break
 
-print max_val
+# print max_val

@@ -14,7 +14,7 @@ def get_field(gen):
         if val > 999:
             rslt.append(val)
     return rslt
-    
+
 def circle_match(x,y):
     return x % 100 == y / 100
 
@@ -30,7 +30,7 @@ def _solve(fields, result, result_index=1):
                 result[result_index] = val
                 if result_index == 5:
                     if circle_match(result[result_index], result[0]):
-                        print sum(result), result
+                        # print sum(result), result
                 else:
                     _solve(fields, result, result_index + 1)
 
@@ -38,7 +38,7 @@ def _solve(fields, result, result_index=1):
 
 def solve(fields, result):
     fields[0].free = False
-    
+
     for val in fields[0].vals:
         result[0] = val
         _solve(fields, result)
@@ -46,7 +46,7 @@ def solve(fields, result):
 def run():
     fields = [Field(get_field(g)) for g in [eu.triangles(), eu.squares(), eu.pentagonals(), eu.hexagonals(), eu.heptagonals(), eu.octagonals()]]
     solve(fields, [0] * 6)
-         
+
 
 # test()
 run()

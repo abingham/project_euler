@@ -3,7 +3,7 @@ def find_solutions(m,n,max):
 
     a = 2mn
     b = m^2 - n^2
-    c = m^2 + n^2 
+    c = m^2 + n^2
     '''
 
     rslt = []
@@ -22,7 +22,7 @@ def find_solutions(m,n,max):
             rslt.append((l, (b,a,c)))
         else:
             rslt.append((l, (a,b,c)))
-    
+
     return rslt
 
 def run(max):
@@ -40,4 +40,4 @@ def run(max):
     return sum([1 for r in results if len(r) == 1])
 
 if __name__ == '__main__':
-    print run(2000000)
+    pass # print run(2000000)

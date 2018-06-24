@@ -33,7 +33,7 @@ def run(max_val):
         nzi = find_nonzero_multiplier(mults)
         if nzi == len(mults) - 1:
             break
-        
+
         # zero it and everything before it out. Increment the next.
         for i in range(nzi + 1):
             mults[i] = 0
@@ -42,7 +42,7 @@ def run(max_val):
 
     for i,v in enumerate(counts):
         if v > 5000:
-            print i
+            # print i
             break
 
 def main():
@@ -50,4 +50,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

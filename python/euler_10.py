@@ -20,10 +20,10 @@ def fast():
     candidates = [True for i in range(max_candidate)]
     candidates[0] = False
     candidates[1] = False
-    
+
     i = 0
     while i < len(candidates):
-        if not candidates[i]: 
+        if not candidates[i]:
             i += 1
             continue
         sum += i
@@ -32,12 +32,12 @@ def fast():
             candidates[j] = False
             j += i
         i += 1
-    print sum
-        
+    print (sum)
+
 def gen():
     sum = 0
     for p in euler_util.primes(max_candidate):
         sum += p
-    print sum
+    print ( sum )
 
 gen()

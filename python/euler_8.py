@@ -6,5 +6,4 @@ for i in range(len(data) - 5):
     if val > max:
         max = val
 
-print max
-    
+# print max

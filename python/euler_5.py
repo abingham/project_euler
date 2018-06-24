@@ -12,4 +12,4 @@ while True:
         break
     val += MAX_DIVISOR
 
-print val
+# print val

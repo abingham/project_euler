@@ -1,5 +1,5 @@
 import cStringIO, itertools, sys
-    
+
 from ordered_set import OrderedSet
 from ring_buffer import RingBuffer
 
@@ -13,18 +13,18 @@ def rotate_solution(ring, externals):
         t = ring[0]
         del ring[0]
         ring.append(t)
-        
+
     return ring, externals
 
 def solution_to_string(ring, externals):
     ring, externals = rotate_solution(ring, externals)
-    
+
     io = cStringIO.StringIO()
     for idx, e in enumerate(externals):
         io.write(str(e))
         io.write(str(ring[idx]))
         io.write(str(ring[idx + 1]))
-                
+
     return io.getvalue()
 
 def solve(ring, values):
@@ -44,7 +44,7 @@ def solve(ring, values):
 def run(size, target_string_size):
 
     solutions = []
-    
+
     values = range(1, size * 2 + 1)
     for idx,v in enumerate(values[:-1 * (size - 1)]):
         for p in itertools.permutations(values[idx + 1:], size - 1):
@@ -56,7 +56,7 @@ def run(size, target_string_size):
                 if len(sz) == target_string_size:
                     solutions.append(int(sz))
 
-    print max(solutions)
+    # print max(solutions)
 
 def main():
     run(int(sys.argv[1]), int(sys.argv[2]))

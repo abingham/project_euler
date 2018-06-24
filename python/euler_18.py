@@ -25,6 +25,4 @@ for row_idx in range(1, len(lattice)):
     for elem_idx in range(len(row)):
         row[elem_idx] += max(prev_row[elem_idx], prev_row[elem_idx + 1])
 
-print row[0]
-        
-
+# print row[0]

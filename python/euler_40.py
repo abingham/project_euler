@@ -8,5 +8,4 @@ result = 1
 for i in range(7):
     result *= int(sz[10**i - 1])
 
-print result
-    
+# print result

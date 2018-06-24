@@ -10,7 +10,7 @@ def fact_sum(n):
 
 def pre_loop_length(n):
     vals = [n]
-    
+
     while True:
         n = fact_sum(n)
         if n in vals:
@@ -21,7 +21,7 @@ def run():
     count = 0
     for i in range(1000000):
         if i % 10000 == 0:
-            print i
+            pass# print i
 
         l = pre_loop_length(i)
         if l == 60:
@@ -29,4 +29,4 @@ def run():
     return count
 
 if __name__ == '__main__':
-    print run()
+    pass # print run()

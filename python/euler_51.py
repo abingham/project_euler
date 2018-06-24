@@ -2,7 +2,7 @@ import euler_util as eu
 
 def run(target=8):
     pgen = eu.GenFinder(eu.gen_primes())
-    
+
     # Loop over all prime numbers
     for prime_idx in eu.numbers():
         curr_prime = pgen[prime_idx]
@@ -33,12 +33,11 @@ def run(target=8):
             if len(found_primes) >= target:
                 # print "answer =",min(found_primes),found_primes,rindices
                 return min(found_primes)
-       
+
 def test():
     arr = [s for s in eu.selections(range(3))]
     arr.sort()
-    print arr
-         
-print run()
+    # print arr
+
+# print run()
 # test()
-                
