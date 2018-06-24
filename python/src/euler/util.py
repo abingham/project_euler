@@ -1,4 +1,7 @@
+from itertools import takewhile
 import bisect, cmath, math, operator, time
+
+from .primes import Primes
 
 
 def is_even(x):
@@ -127,58 +130,7 @@ def bin(n):
     rval = ''.join(rval).lstrip('0')
     return rval or '0'
 
-def primes(up_to):
-    '''
-    generates a list of primes in the range [2,up_to]
-    '''
-    if up_to == 0:
-        return
-
-    candidates = [True for i in xrange(up_to + 1)]
-    candidates[0] = False
-    candidates[1] = False
-
-    i = 0
-    l = len(candidates)
-    while i < l:
-        if not candidates[i]:
-            i += 1
-            continue
-
-        yield i
-
-        j = i
-        while j < l:
-            candidates[j] = False
-            j += i
-        i += 1
-
-def _is_prime(x, priors):
-    '''
-    helper function for gen_primes. This determines if x is a prime number,
-    given the list 'priors' which is all primes less than x.
-    '''
-    s = int(math.sqrt(x))
-    for p in priors:
-        if operator.le(p, s):
-            if operator.mod(x,p) == 0:
-                return False
-        else:
-            break
-    return True
-
-def gen_primes():
-    '''
-    an unbounded generator of primes starting at 2
-    '''
-    priors = [2]
-    yield 2
-    for n in numbers(3, stride=2):
-        if _is_prime(n, priors):
-            yield n
-            priors.append(n)
-
-def prime_factors(val, prime_values = None):
+def prime_factors(val, generator_class=Primes):
     '''
     Generates the prime factorization of val. Uses the values
     in primes as the prime numbers (so make sure it's correct!)
@@ -189,25 +141,19 @@ def prime_factors(val, prime_values = None):
 
     max_prime = int(math.ceil(math.sqrt(val)))
 
-    if not prime_values or not len(prime_values) or prime_values[-1] < max_prime:
-        prime_values = list(primes(max_prime))
-
-    rval = []
     count = 0
-    for p in prime_values:
-        if p > max_prime:
-            break
-
-        (d,m) = divmod(val, p)
+    for prime in takewhile(lambda p: p <= max_prime, generator_class()):
+        (d, m) = divmod(val, prime)
         while m == 0:
             count += 1
             val = d
-            (d,m) = divmod(val, p)
+            (d, m) = divmod(val, prime)
         if count != 0:
-            yield (p,count)
+            yield (prime, count)
         if val < 2:
             break
         count = 0
+
     if val != 1:
         # val must be a prime itself
         yield (val, 1)
