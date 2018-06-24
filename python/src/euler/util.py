@@ -240,11 +240,13 @@ def selections(toks):
         for c in combinations(toks, i):
             yield c
 
+
 def palindrome(s):
-    for i in xrange(len(s) / 2):
+    for i in range(len(s) // 2):
         if s[i] != s[-1 * (i + 1)]:
             return False
     return True
+
 
 def fib():
     '''
