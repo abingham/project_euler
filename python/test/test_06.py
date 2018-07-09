@@ -1,4 +1,4 @@
-from euler.euler_06 import square_of_sum, sum_of_squares
+from euler.euler_06 import main, square_of_sum, sum_of_squares
 
 
 def test_infrastructure():
@@ -8,5 +8,4 @@ def test_infrastructure():
 
 
 def test_main():
-    result = square_of_sum(100) - sum_of_squares(100)
-    assert result == 25164150
+    assert main() == 25164150

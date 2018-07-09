@@ -11,8 +11,8 @@ class Primes:
         helper function for gen_primes. This determines if x is a prime number,
         given the list 'priors' which is all primes less than x.
         """
-        s = int(math.sqrt(x))
-        priors = takewhile(lambda i: i < s, self._priors)
+        s = math.ceil(math.sqrt(x))
+        priors = takewhile(lambda i: i <= s, self._priors)
         if any(x % prior == 0 for prior in priors):
             return False
         return True

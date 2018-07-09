@@ -22,7 +22,9 @@ setup(
     include_package_data=True,
     package_dir={'': 'src'},
     # package_data={'euler': . . .},
-    install_requires=[],
+    install_requires=[
+        'more-itertools',
+    ],
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax, for
     # example: $ pip install -e .[dev,test]
