@@ -1,0 +1,12 @@
+from euler.euler_06 import square_of_sum, sum_of_squares
+
+
+def test_infrastructure():
+    assert sum_of_squares(10) == 385
+    assert square_of_sum(10) == 3025
+    assert square_of_sum(10) - sum_of_squares(10) == 2640
+
+
+def test_main():
+    result = square_of_sum(100) - sum_of_squares(100)
+    assert result == 25164150
