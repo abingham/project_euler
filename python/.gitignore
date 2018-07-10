@@ -5,3 +5,4 @@ __pycache__
 *.egg-info
 .hypothesis
 .pytest_cache
+.cache
