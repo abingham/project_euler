@@ -1,5 +1,10 @@
+import bisect
+import cmath
+from functools import reduce
 from itertools import takewhile
-import bisect, cmath, math, operator, time
+import math
+import operator
+import time
 
 from .primes import Primes
 
@@ -9,13 +14,13 @@ def is_even(x):
     return x % 2 == 0
 
 
-def bsearch(l,x,comp=None):
+def bsearch(l, x, comp=None):
     '''
     Searches a sorted list for x. If it's found, return
     the index, otherwise return -1
     '''
 
-    idx = bisect.bisect_left(l,x)
+    idx = bisect.bisect_left(l, x)
     try:
         if l[idx] == x:
             return idx
@@ -23,6 +28,7 @@ def bsearch(l,x,comp=None):
             return -1
     except IndexError:
         return -1
+
 
 class GenFinder:
     def __init__(self, gen):
@@ -61,11 +67,13 @@ class GenFinder:
         else:
             return -1
 
+
 def numbers(start=0, stride=1, max=None):
     i = start
-    while max == None or i < max:
+    while max is None or i < max:
         yield i
         i += stride
+
 
 def digits(num):
     '''
@@ -74,10 +82,11 @@ def digits(num):
     '''
     rval = []
     while num > 0:
-        (num,mod) = divmod(num, 10)
+        (num, mod) = divmod(num, 10)
         rval.append(mod)
     rval.reverse()
     return rval
+
 
 def undigits(digits):
     '''
@@ -90,37 +99,40 @@ def undigits(digits):
         sum += d
     return sum
 
+
 def length(x):
-    '''
-    returns the length in decimal digits of a number. Note that this returns 1 if
-    x is zero.
+    '''returns the length in decimal digits of a number. Note that this
+    returns 1 if x is zero.
     '''
     if x == 0:
         return 1
     return int(math.log10(x)) + 1
 
-def num_cat(x,y):
+
+def num_cat(x, y):
     'concatenates two numbers. x,y->xy'
     return x * pow(10, length(y)) + y
 
+
 hex2bin = {
-    '0' : '0000',
-    '1' : '0001',
-    '2' : '0010',
-    '3' : '0011',
-    '4' : '0100',
-    '5' : '0101',
-    '6' : '0110',
-    '7' : '0111',
-    '8' : '1000',
-    '9' : '1001',
-    'a' : '1010',
-    'b' : '1011',
-    'c' : '1100',
-    'd' : '1101',
-    'e' : '1110',
-    'f' : '1111'
+    '0': '0000',
+    '1': '0001',
+    '2': '0010',
+    '3': '0011',
+    '4': '0100',
+    '5': '0101',
+    '6': '0110',
+    '7': '0111',
+    '8': '1000',
+    '9': '1001',
+    'a': '1010',
+    'b': '1011',
+    'c': '1100',
+    'd': '1101',
+    'e': '1110',
+    'f': '1111'
 }
+
 
 def bin(n):
     '''
@@ -129,6 +141,23 @@ def bin(n):
     rval = [hex2bin[h] for h in '%x' % n]
     rval = ''.join(rval).lstrip('0')
     return rval or '0'
+
+
+def least_common_multiple(divisors):
+    """Find small integer that is a multiple of each of a set of multiples.
+
+    Args:
+        divisors: iterable of integers to find the LCM of.
+
+    Returns: The smallest number that is a multiple of each elements of
+        `divisors`.
+    """
+    factors = {}
+    for divisor in divisors:
+        for prime, count in prime_factors(divisor):
+            factors[prime] = max(count, factors.get(prime, 0))
+    return reduce(operator.mul, (f ** c for f, c in factors.items()), 1)
+
 
 def prime_factors(val, generator_class=Primes):
     '''
@@ -158,14 +187,16 @@ def prime_factors(val, generator_class=Primes):
         # val must be a prime itself
         yield (val, 1)
 
+
 def _proper_divisors(factors):
     if len(factors) == 0:
         return [1]
     rval = []
     factor = factors[0]
-    for i in xrange(0, factor[1] + 1):
+    for i in range(0, factor[1] + 1):
         rval += [factor[0]**i * v for v in _proper_divisors(factors[1:])]
     return rval
+
 
 def proper_divisors(n):
     '''
@@ -173,6 +204,7 @@ def proper_divisors(n):
     '''
     factors = [f for f in prime_factors(n)]
     return _proper_divisors(factors)[:-1]
+
 
 def permutations(tokens, size=None):
     '''
@@ -185,20 +217,22 @@ def permutations(tokens, size=None):
         size = len(tokens)
 
     if size > 0:
-        for i in xrange(len(tokens)):
-            tokens[0],tokens[i] = tokens[i],tokens[0]
+        for i in range(len(tokens)):
+            tokens[0], tokens[i] = tokens[i], tokens[0]
             yield [tokens[0]]
             for rest in permutations(tokens[1:], size - 1):
                 yield [tokens[0]] + rest
+
 
 def opermutations(tokens):
     if len(tokens) == 0:
         yield []
     else:
-        for i in xrange(len(tokens)):
+        for i in range(len(tokens)):
             yield [tokens[i]]
             for p in opermutations(tokens[i+1:]):
                 yield [tokens[i]] + p
+
 
 def combos(toks):
     '''
@@ -208,7 +242,7 @@ def combos(toks):
     if len(toks) == 1:
         yield toks
     else:
-        for i in xrange(len(toks)):
+        for i in range(len(toks)):
             temp = operator.getitem(toks, 0)
             operator.setitem(toks, 0, operator.getitem(toks, i))
             operator.setitem(toks, i, temp)
@@ -218,6 +252,7 @@ def combos(toks):
             operator.setitem(toks, 0, operator.getitem(toks, i))
             operator.setitem(toks, i, temp)
 
+
 def combinations(toks, size):
     '''
     yields all combinations of toks of a given size...order is unimportant.
@@ -226,17 +261,17 @@ def combinations(toks, size):
     if size == 0:
         yield []
     else:
-        for i in xrange(len(toks) - size + 1):
+        for i in range(len(toks) - size + 1):
             for c in combinations(toks[i + 1:], size - 1):
                 yield [toks[i]] + c
 
+
 def selections(toks):
+    '''yields all possible selections of elements from 'toks', including the
+    empty set. Order is not important, so, e.g., [1,2,3] and [3,2,1] will not
+    both be yielded.
     '''
-    yields all possible selections of elements from 'toks', including the
-    empty set. Order is not important, so, e.g., [1,2,3] and [3,2,1] will not both
-    be yielded.
-    '''
-    for i in xrange(len(toks) + 1):
+    for i in range(len(toks) + 1):
         for c in combinations(toks, i):
             yield c
 
@@ -256,9 +291,9 @@ def fib():
     and so on...
     '''
     prev = 1
-    yield (1,prev)
+    yield (1, prev)
     curr = 1
-    yield (2,curr)
+    yield (2, curr)
 
     idx = 3
     while True:
@@ -267,6 +302,7 @@ def fib():
         idx += 1
         prev = curr
         curr = rval
+
 
 def time_function(f):
     '''
@@ -277,15 +313,19 @@ def time_function(f):
     x = f()
     return (x, time.clock() - t1)
 
-def fact(n):
-    return reduce(operator.mul, xrange(2,n+1), 1)
 
-_all_digits = [1,2,3,4,5,6,7,8,9]
+def fact(n):
+    return reduce(operator.mul, range(2, n+1), 1)
+
+
+_all_digits = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 
 def pandigital(l):
-    d = reduce(lambda x,y: x + digits(y), l, [])
+    d = reduce(lambda x, y: x + digits(y), l, [])
     d.sort()
     return d == _all_digits
+
 
 def word_value(sz):
     '''
@@ -294,51 +334,65 @@ def word_value(sz):
     ord_base = ord('A') - 1
     return sum([ord(l) - ord_base for l in sz.upper()])
 
+
 def triangle(i):
     return i * (i + 1) / 2
+
 
 def triangles():
     for i in numbers(1):
         yield triangle(i)
 
+
 def square(i):
-    return pow(i,2)
+    return pow(i, 2)
+
 
 def squares():
     for i in numbers(1):
         yield square(i)
 
+
 def is_square(x):
     x = math.sqrt(x)
     return (x == int(x))
+
 
 def pentagonals():
     for i in numbers(1):
         yield pentagonal(i)
 
+
 def pentagonal(i):
     return i * (3 * i - 1) / 2
 
+
 def hexagonal(i):
     return i * (2 * i - 1)
+
 
 def hexagonals():
     for i in numbers(1):
         yield hexagonal(i)
 
+
 def heptagonal(i):
     return i * (5 * i - 3) / 2
+
 
 def heptagonals():
     for i in numbers(1):
         yield heptagonal(i)
 
+
 def octagonal(i):
     return i * (3 * i - 2)
+
 
 def octagonals():
     for i in numbers(1):
         yield octagonal(i)
+
 
 def accumulate(l, f, prev):
     results = []
@@ -347,7 +401,8 @@ def accumulate(l, f, prev):
         results.append(prev)
     return results
 
-def quadratic_roots(a,b,c):
+
+def quadratic_roots(a, b, c):
     '''
     returns (root1, root2)
 
@@ -358,17 +413,21 @@ def quadratic_roots(a,b,c):
 
     return (c1 + c2) / c3, (c1 - c2) / c3
 
+
 def sqrt_continued_fraction(a):
     '''
     Calculates the periodic continued fraction for the square root of a
     '''
 
-    new_b = lambda x,b,c : -1 * (b - x * c)
-    new_c = lambda x,a,b,c: (a - int(pow(b - x * c, 2))) / c
+    def new_b(x, b, c):
+        return -1 * (b - x * c)
+
+    def new_c(x, a, b, c):
+        return (a - int(pow(b - x * c, 2))) / c
 
     x = int(math.sqrt(a))
-    b = new_b(x,0,1)
-    c = new_c(x,a,0,1)
+    b = new_b(x, 0, 1)
+    c = new_c(x, a, 0, 1)
 
     rval = [x]
 
@@ -379,7 +438,8 @@ def sqrt_continued_fraction(a):
         if c == 1:
             return rval
 
-        b,c = (new_b(x,b,c), new_c(x,a,b,c))
+        b, c = (new_b(x, b, c), new_c(x, a, b, c))
+
 
 def convergent(cf):
     '''
@@ -389,15 +449,16 @@ def convergent(cf):
     c = 1
     b = cf[-1]
     for a in reversed(cf[:-1]):
-        b,c = (c,b)
+        b, c = (c, b)
         b = a * c + b
-    return (b,c)
+    return (b, c)
 
-def eulers_totient(x, prime_values = None):
+
+def eulers_totient(x, prime_values=None):
     rslt = 1
 
     pfs = prime_factors(x, prime_values)
-    for prime,power in pfs:
+    for prime, power in pfs:
         a = prime - 1
         b = prime ** (power - 1)
 
@@ -405,7 +466,8 @@ def eulers_totient(x, prime_values = None):
 
     return rslt
 
-def fraction_compare(a,b):
+
+def fraction_compare(a, b):
     '''compare two fraction in tuple form (numerator,denominator)
 
     :return: 0 if they're equal, -1 if a < b, 1 if a > b
@@ -419,6 +481,7 @@ def fraction_compare(a,b):
     else:
         return 0
 
+
 def trace(meth):
     '''Simple function tracing decorator'''
     def new_meth(*args):
@@ -426,9 +489,3 @@ def trace(meth):
         # print (meth.__name__,args,'->',rval)
         return rval
     return new_meth
-
-def main():
-    pass # print ([p for p in opermutations([0,1,2,3])])
-
-if __name__ == '__main__':
-    main()
