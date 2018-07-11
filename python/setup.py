@@ -21,7 +21,7 @@ setup(
     platforms='any',
     include_package_data=True,
     package_dir={'': 'src'},
-    # package_data={'euler': . . .},
+    package_data={'euler': 'data/primes/primes*.zip'},
     install_requires=[
         'more-itertools',
     ],

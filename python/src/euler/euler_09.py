@@ -10,12 +10,14 @@ Find the product abc.
 
 from itertools import count
 
+
 def pythagorean_triplets():
     for c in count(3):
         for b in range(2, c):
             for a in range(1, b):
                 if a**2 + b**2 == c**2:
                     yield (a, b, c)
+
 
 def main():
     return next(a * b * c

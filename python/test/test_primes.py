@@ -1,12 +1,24 @@
 from itertools import islice
 
-from euler.primes import Primes
+from euler.primes import PrimesCalculator, PrimesReader
+import pytest
 
 
-def test_first_thousand_primes():
+@pytest.fixture(params=[PrimesCalculator, PrimesReader])
+def prime_generator(request):
+    return request.param
+
+
+def test_first_thousand_primes_correect(prime_generator):
     expected = list(map(int, FIRST_THOUSAND_PRIMES.split()))
-    actual = list(islice(Primes(), 1000))
+    actual = list(islice(prime_generator(), 1000))
     assert actual == expected
+
+
+def test_calculator_and_reader_are_equivalent():
+    c = list(islice(PrimesCalculator(), 10000))
+    r = list(islice(PrimesReader(), 10000))
+    assert c == r
 
 
 # from https://primes.utm.edu/lists/small/1000.txt

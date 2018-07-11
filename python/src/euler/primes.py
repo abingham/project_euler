@@ -1,8 +1,10 @@
 from itertools import count, takewhile
 import math
+import pkg_resources
+from zipfile import ZipFile
 
 
-class Primes:
+class PrimesCalculator:
     def __init__(self):
         self._priors = [2]
 
@@ -27,6 +29,26 @@ class Primes:
                 yield n
                 self._priors.append(n)
 
+
+class PrimesReader:
+    def __iter__(self):
+        # TODO: This should be expanded to process *all* zipfiles found in the
+        # "primes" directory
+
+        filename = pkg_resources.resource_filename(
+            'euler', 'data/primes/primes1.zip')
+
+        with ZipFile(filename, mode='r') as archive:
+            for filename in sorted(archive.namelist()):
+                with archive.open(filename) as handle:
+                    for line in handle:
+                        try:
+                            yield from [int(tok) for tok in line.split()]
+                        except ValueError:
+                            pass
+
+
+Primes = PrimesReader
 
 # def read_primes_(filenames):
 #     '''
