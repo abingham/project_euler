@@ -1,3 +1,5 @@
+from collections import Counter
+
 import euler.util
 from hypothesis import assume, given
 import hypothesis.strategies as ST
@@ -15,9 +17,8 @@ def test_is_even_is_false_for_1():
     assert not euler.util.is_even(1)
 
 def test_prime_factors():
-    factors = euler.util.prime_factors(13195)
-    actual = sorted(f[0] for f in factors)
-    expected = [5, 7, 13, 29]
+    actual = euler.util.prime_factors(13195)
+    expected = Counter((1, 5, 7, 13, 29))
     assert actual == expected
 
 

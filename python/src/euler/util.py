@@ -1,5 +1,6 @@
 import bisect
 import cmath
+from collections import Counter
 from functools import reduce
 from itertools import takewhile
 import math
@@ -152,41 +153,47 @@ def least_common_multiple(divisors):
     Returns: The smallest number that is a multiple of each elements of
         `divisors`.
     """
-    factors = {}
-    for divisor in divisors:
-        for prime, count in prime_factors(divisor):
-            factors[prime] = max(count, factors.get(prime, 0))
-    return reduce(operator.mul, (f ** c for f, c in factors.items()), 1)
+    factors = reduce(operator.or_,
+                     map(prime_factors, divisors),
+                     Counter())
+    return reduce(operator.mul,
+                  (f ** c for f, c in factors.items()),
+                  1)
 
 
-def prime_factors(val, generator_class=Primes):
-    '''
-    Generates the prime factorization of val. Uses the values
-    in primes as the prime numbers (so make sure it's correct!)
-    Generates a list of tuples:
+def prime_factors(val, generator_class=Primes, include_one=True):
+    '''Generates the prime factorization of val. Uses the values in primes as the
+    prime numbers (so make sure it's correct!)
 
-       [(prime, power), ...]
+    Args:
+        val: The value to factor
+        generator_class: The unary callable that produces a sequence of primes
+        include_one: Whether 1 should be included in the output
+
+    Returns: A `collectons.Counter` of primes mapped to their counts in the
+        factorization.
     '''
 
     max_prime = int(math.ceil(math.sqrt(val)))
+    factors = Counter()
+    if include_one:
+        factors[1] = 1
 
-    count = 0
     for prime in takewhile(lambda p: p <= max_prime, generator_class()):
         (d, m) = divmod(val, prime)
         while m == 0:
-            count += 1
+            factors[prime] += 1
             val = d
             (d, m) = divmod(val, prime)
-        if count != 0:
-            yield (prime, count)
+
         if val < 2:
             break
-        count = 0
 
     if val != 1:
         # val must be a prime itself
-        yield (val, 1)
+        factors[val] = 1
 
+    return factors
 
 def _proper_divisors(factors):
     if len(factors) == 0:

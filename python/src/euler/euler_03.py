@@ -8,4 +8,4 @@ import euler.util
 value = 600851475143
 
 def main():
-    return max([x[0] for x in euler.util.prime_factors(value)])
+    return max(euler.util.prime_factors(value))
