@@ -2,7 +2,7 @@ import bisect
 import cmath
 from collections import Counter
 from functools import reduce
-from itertools import takewhile
+from itertools import chain, combinations, takewhile
 import math
 import operator
 import time
@@ -195,22 +195,29 @@ def prime_factors(val, generator_class=Primes, include_one=True):
 
     return factors
 
-def _proper_divisors(factors):
-    if len(factors) == 0:
-        return [1]
-    rval = []
-    factor = factors[0]
-    for i in range(0, factor[1] + 1):
-        rval += [factor[0]**i * v for v in _proper_divisors(factors[1:])]
-    return rval
+def factors(n):
+    pfs = tuple(prime_factors(n).elements())
+    all_combos = chain(*(combinations(pfs, n)
+                         for n
+                         in range(1, len(pfs) + 1)))
+    return set(reduce(operator.mul, combo, 1) for combo in all_combos)
+
+# def _proper_divisors(factors):
+#     if len(factors) == 0:
+#         return [1]
+#     rval = []
+#     factor = factors[0]
+#     for i in range(0, factor[1] + 1):
+#         rval += [factor[0]**i * v for v in _proper_divisors(factors[1:])]
+#     return rval
 
 
-def proper_divisors(n):
-    '''
-    Returns a list (not guaranteed to be sorted) of proper divisors of n
-    '''
-    factors = [f for f in prime_factors(n)]
-    return _proper_divisors(factors)[:-1]
+# def proper_divisors(n):
+#     '''
+#     Returns a list (not guaranteed to be sorted) of proper divisors of n
+#     '''
+#     factors = [f for f in prime_factors(n)]
+#     return _proper_divisors(factors)[:-1]
 
 
 def permutations(tokens, size=None):

@@ -16,10 +16,26 @@ def test_is_even_is_true_for_0():
 def test_is_even_is_false_for_1():
     assert not euler.util.is_even(1)
 
+
 def test_prime_factors():
     actual = euler.util.prime_factors(13195)
     expected = Counter((1, 5, 7, 13, 29))
     assert actual == expected
+
+
+def test_factors():
+    cases = {
+        1: [1],
+        3: [1, 3],
+        6: [1, 2, 3, 6],
+        10: [1, 2, 5, 10],
+        15: [1, 3, 5, 15],
+        21: [1, 3, 7, 21],
+        28: [1, 2, 4, 7, 14, 28],
+    }
+
+    for n, fs in cases.items():
+        assert sorted(euler.util.factors(n)) == sorted(fs)
 
 
 @given(ST.text())
