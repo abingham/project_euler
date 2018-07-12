@@ -3,24 +3,14 @@
 How many such routes are there through a 20×20 grid?
 """
 
-from itertools import chain
-
 from more_itertools import nth
 
 from euler.lib.util import is_even
-
-
-def pascals_triangle():
-    level = (1,)
-    while True:
-        yield level
-        top = chain(level, [0])
-        bottom = chain([0], level)
-        level = tuple(a + b for a, b in zip(top, bottom))
+import euler.lib.sequences
 
 
 def lattice_paths(n):
-    level = nth(pascals_triangle(), 2 * n)
+    level = nth(euler.lib.sequences.pascals_triangle(), 2 * n)
     assert not is_even(len(level))
     return level[len(level) // 2]
 
