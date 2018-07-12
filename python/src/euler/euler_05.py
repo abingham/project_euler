@@ -6,7 +6,7 @@ numbers from 1 to 20?
 
 """
 
-from euler.util import least_common_multiple
+from euler.lib.util import least_common_multiple
 
 
 def main():

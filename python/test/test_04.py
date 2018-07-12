@@ -1,5 +1,5 @@
 from euler.euler_04 import main, products
-from euler.util import palindrome
+from euler.lib.util import palindrome
 
 
 def test_infrastructure():

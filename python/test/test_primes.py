@@ -1,6 +1,6 @@
 from itertools import islice
 
-from euler.primes import PrimesCalculator, PrimesReader
+from euler.lib.primes import PrimesCalculator, PrimesReader
 import pytest
 
 

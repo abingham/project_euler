@@ -1,5 +1,5 @@
 from itertools import islice
-from euler.sequences import fibonacci
+from euler.lib.sequences import fibonacci
 
 
 def test_fibonacci():

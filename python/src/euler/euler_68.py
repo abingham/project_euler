@@ -1,7 +1,7 @@
 import cStringIO, itertools, sys
 
 from ordered_set import OrderedSet
-from ring_buffer import RingBuffer
+from euler.lib.ring_buffer import RingBuffer
 
 def rotate_solution(ring, externals):
     m = min(externals)

@@ -5,7 +5,7 @@ What is the 10 001st prime number?
 """
 
 
-from euler.primes import Primes
+from euler.lib.primes import Primes
 from more_itertools import nth
 
 

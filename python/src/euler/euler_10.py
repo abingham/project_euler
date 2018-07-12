@@ -5,7 +5,7 @@ Find the sum of all the primes below two million.
 """
 
 from itertools import takewhile
-from euler.primes import Primes
+from euler.lib.primes import Primes
 
 
 def sum_of_primes_below(n):

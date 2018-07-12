@@ -21,7 +21,7 @@ divisors?
 
 """
 
-from euler.util import factors, triangles
+from euler.lib.util import factors, triangles
 
 
 def first_triangle_with_n_divisors(n):

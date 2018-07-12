@@ -1,4 +1,4 @@
-from euler.util import palindrome
+from euler.lib.util import palindrome
 
 
 def products(min_val, max_val):

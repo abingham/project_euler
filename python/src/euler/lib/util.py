@@ -1,79 +1,17 @@
-import bisect
 import cmath
 from collections import Counter
 from functools import reduce
-from itertools import chain, combinations, takewhile
+from itertools import chain, combinations, count, takewhile
 import math
 import operator
 import time
 
-from .primes import Primes
+from euler.lib.primes import Primes
 
 
 def is_even(x):
     """Determine if an integer is even."""
     return x % 2 == 0
-
-
-def bsearch(l, x, comp=None):
-    '''
-    Searches a sorted list for x. If it's found, return
-    the index, otherwise return -1
-    '''
-
-    idx = bisect.bisect_left(l, x)
-    try:
-        if l[idx] == x:
-            return idx
-        else:
-            return -1
-    except IndexError:
-        return -1
-
-
-class GenFinder:
-    def __init__(self, gen):
-        self.gen = gen
-        self.data = [self.gen.next()]
-
-    def __getitem__(self, i):
-        while len(self.data) <= i:
-            self.data.append(self.gen.next())
-        return self.data[i]
-
-    '''
-    def __setitem__(self, i, x):
-        while len(self.data) <= i:
-            self.data.append(self.gen.next())
-        self.data[i] = x
-    '''
-
-    def __len__(self):
-        return len(self.data)
-
-    def contains(self, x):
-        return self.find(x) != -1
-
-    def find(self, x):
-        if self.data[-1] < x:
-            return self.find_new(x)
-        else:
-            return bsearch(self.data, x)
-
-    def find_new(self, x):
-        while self.data[-1] < x:
-            self.data.append(self.gen.next())
-        if self.data[-1] == x:
-            return len(self.data) - 1
-        else:
-            return -1
-
-
-def numbers(start=0, stride=1, max=None):
-    i = start
-    while max is None or i < max:
-        yield i
-        i += stride
 
 
 def digits(num):
@@ -195,99 +133,36 @@ def prime_factors(val, generator_class=Primes, include_one=True):
 
     return factors
 
+
 def factors(n):
+    """Get all factors of a number.
+
+    This returns a `set` of all integers that divide evenly into `n`.
+
+    Args:
+        n: The number to find the factors of.
+
+    Returns: The set of integers that evenly divide into `n`.
+    """
     pfs = tuple(prime_factors(n).elements())
-    all_combos = chain(*(combinations(pfs, n)
-                         for n
-                         in range(1, len(pfs) + 1)))
-    return set(reduce(operator.mul, combo, 1) for combo in all_combos)
-
-# def _proper_divisors(factors):
-#     if len(factors) == 0:
-#         return [1]
-#     rval = []
-#     factor = factors[0]
-#     for i in range(0, factor[1] + 1):
-#         rval += [factor[0]**i * v for v in _proper_divisors(factors[1:])]
-#     return rval
+    return set(reduce(operator.mul, selection, 1)
+               for selection
+               in selections(pfs))
 
 
-# def proper_divisors(n):
-#     '''
-#     Returns a list (not guaranteed to be sorted) of proper divisors of n
-#     '''
-#     factors = [f for f in prime_factors(n)]
-#     return _proper_divisors(factors)[:-1]
+def selections(seq):
+    """All combinations of all sizes of a sequence.
 
+    Args:
+        iterable: Any sequence object
 
-def permutations(tokens, size=None):
-    '''
-    Generates permutations of a list of tokens. This will generate all
-    permutations with length up to 'size'. If size is unspecified,
-    this will generate all permutations. Order is important, so selections
-    can be repeated in different orders
-    '''
-    if size is None:
-        size = len(tokens)
-
-    if size > 0:
-        for i in range(len(tokens)):
-            tokens[0], tokens[i] = tokens[i], tokens[0]
-            yield [tokens[0]]
-            for rest in permutations(tokens[1:], size - 1):
-                yield [tokens[0]] + rest
-
-
-def opermutations(tokens):
-    if len(tokens) == 0:
-        yield []
-    else:
-        for i in range(len(tokens)):
-            yield [tokens[i]]
-            for p in opermutations(tokens[i+1:]):
-                yield [tokens[i]] + p
-
-
-def combos(toks):
-    '''
-    generates all possible orderings of 'toks'
-    NOTE: You should be using itertools if possible
-    '''
-    if len(toks) == 1:
-        yield toks
-    else:
-        for i in range(len(toks)):
-            temp = operator.getitem(toks, 0)
-            operator.setitem(toks, 0, operator.getitem(toks, i))
-            operator.setitem(toks, i, temp)
-            for rest in combos(toks[1:]):
-                yield [operator.getitem(toks, 0)] + rest
-            temp = operator.getitem(toks, 0)
-            operator.setitem(toks, 0, operator.getitem(toks, i))
-            operator.setitem(toks, i, temp)
-
-
-def combinations(toks, size):
-    '''
-    yields all combinations of toks of a given size...order is unimportant.
-    '''
-
-    if size == 0:
-        yield []
-    else:
-        for i in range(len(toks) - size + 1):
-            for c in combinations(toks[i + 1:], size - 1):
-                yield [toks[i]] + c
-
-
-def selections(toks):
-    '''yields all possible selections of elements from 'toks', including the
-    empty set. Order is not important, so, e.g., [1,2,3] and [3,2,1] will not
-    both be yielded.
-    '''
-    for i in range(len(toks) + 1):
-        for c in combinations(toks, i):
-            yield c
+    Returns: An iterable of combinations of elements from `iterable`. The
+        combinations will be of size `[1-len(seq)]`. The order of the
+        combinations is not guaranteed.
+    """
+    return chain(*(combinations(seq, n)
+                   for n
+                   in range(1, len(seq) + 1)))
 
 
 def palindrome(s):
@@ -295,27 +170,6 @@ def palindrome(s):
         if s[i] != s[-1 * (i + 1)]:
             return False
     return True
-
-
-def fib():
-    '''
-    Generates fibonacci numbers. [1,1,2,3,...]
-    Yields valus in the form (<index>, <value>). So the
-    first yield is (1,1), second is (2,1), then (3,2), (4,3),
-    and so on...
-    '''
-    prev = 1
-    yield (1, prev)
-    curr = 1
-    yield (2, curr)
-
-    idx = 3
-    while True:
-        rval = prev + curr
-        yield (idx, rval)
-        idx += 1
-        prev = curr
-        curr = rval
 
 
 def time_function(f):
@@ -354,7 +208,7 @@ def triangle(i):
 
 
 def triangles():
-    for i in numbers(1):
+    for i in count(1):
         yield triangle(i)
 
 
@@ -363,7 +217,7 @@ def square(i):
 
 
 def squares():
-    for i in numbers(1):
+    for i in count(1):
         yield square(i)
 
 
@@ -373,7 +227,7 @@ def is_square(x):
 
 
 def pentagonals():
-    for i in numbers(1):
+    for i in count(1):
         yield pentagonal(i)
 
 
@@ -386,7 +240,7 @@ def hexagonal(i):
 
 
 def hexagonals():
-    for i in numbers(1):
+    for i in count(1):
         yield hexagonal(i)
 
 
@@ -395,7 +249,7 @@ def heptagonal(i):
 
 
 def heptagonals():
-    for i in numbers(1):
+    for i in count(1):
         yield heptagonal(i)
 
 
@@ -404,16 +258,8 @@ def octagonal(i):
 
 
 def octagonals():
-    for i in numbers(1):
+    for i in count(1):
         yield octagonal(i)
-
-
-def accumulate(l, f, prev):
-    results = []
-    for i in l:
-        prev = f(prev, i)
-        results.append(prev)
-    return results
 
 
 def quadratic_roots(a, b, c):

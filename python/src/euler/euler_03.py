@@ -3,9 +3,9 @@
 What is the largest prime factor of the number 600851475143 ?
 """
 
-import euler.util
+import euler.lib.util
 
 value = 600851475143
 
 def main():
-    return max(euler.util.prime_factors(value))
+    return max(euler.lib.util.prime_factors(value))

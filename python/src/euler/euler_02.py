@@ -9,8 +9,8 @@ four million, find the sum of the even-valued terms.
 
 from itertools import takewhile
 
-from euler.util import is_even
-from euler.sequences import fibonacci
+from euler.lib.util import is_even
+from euler.lib.sequences import fibonacci
 
 
 def main():
