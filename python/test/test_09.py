@@ -1,5 +1,5 @@
 from itertools import islice
-from euler.euler_09 import main, pythagorean_triplets
+from euler.exercises.ex0009 import main, pythagorean_triplets
 
 
 def test_infrastructure():

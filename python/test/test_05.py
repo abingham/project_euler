@@ -1,4 +1,4 @@
-from euler.euler_05 import least_common_multiple, main
+from euler.exercises.ex0005 import least_common_multiple, main
 
 
 def test_infrastructure():

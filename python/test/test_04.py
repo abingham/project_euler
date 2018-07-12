@@ -1,4 +1,4 @@
-from euler.euler_04 import main, products
+from euler.exercises.ex0004 import main, products
 from euler.lib.util import palindrome
 
 

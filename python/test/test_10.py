@@ -1,4 +1,4 @@
-from euler.euler_10 import main, sum_of_primes_below
+from euler.exercises.ex0010 import main, sum_of_primes_below
 
 
 def test_infrastructure():

@@ -1,4 +1,4 @@
-from euler.euler_07 import main, nth_prime
+from euler.exercises.ex0007 import main, nth_prime
 
 
 def test_infrastructure():

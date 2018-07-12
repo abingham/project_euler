@@ -1,4 +1,4 @@
-from euler.euler_02 import main
+from euler.exercises.ex0002 import main
 
 
 def test_answer():

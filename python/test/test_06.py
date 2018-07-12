@@ -1,4 +1,4 @@
-from euler.euler_06 import main, square_of_sum, sum_of_squares
+from euler.exercises.ex0006 import main, square_of_sum, sum_of_squares
 
 
 def test_infrastructure():

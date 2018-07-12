@@ -1,4 +1,4 @@
-from euler.euler_01 import lt, main, multiples
+from euler.exercises.ex0001 import lt, main, multiples
 
 
 def test_internal():

@@ -1,4 +1,4 @@
-from euler.euler_08 import NUMBER, main, max_product
+from euler.exercises.ex0008 import NUMBER, main, max_product
 
 
 def test_infrastructure():

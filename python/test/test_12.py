@@ -1,4 +1,4 @@
-from euler.euler_12 import first_triangle_with_n_divisors, main
+from euler.exercises.ex0012 import first_triangle_with_n_divisors, main
 
 
 def test_infrastructure():
