@@ -20,3 +20,14 @@ What is the value of the first triangle number to have over five hundred
 divisors?
 
 """
+
+from euler.util import factors, triangles
+
+
+def first_triangle_with_n_divisors(n):
+    return next(t for t in triangles()
+                if len(factors(t)) >= n)
+
+
+def main():
+    return first_triangle_with_n_divisors(500)

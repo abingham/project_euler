@@ -1,4 +1,5 @@
 from collections import Counter
+from itertools import islice
 
 import euler.util
 from hypothesis import assume, given
@@ -36,6 +37,12 @@ def test_factors():
 
     for n, fs in cases.items():
         assert sorted(euler.util.factors(n)) == sorted(fs)
+
+
+def test_triangle_numbers():
+    actual = list(islice(euler.util.triangles(), 10))
+    expected = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55]
+    assert actual == expected
 
 
 @given(ST.text())

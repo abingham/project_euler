@@ -350,7 +350,7 @@ def word_value(sz):
 
 
 def triangle(i):
-    return i * (i + 1) / 2
+    return i * (i + 1) // 2
 
 
 def triangles():
