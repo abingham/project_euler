@@ -1,6 +1,11 @@
-class Matrix:
-    def __init__(self):
-        self.data = '''37107287533902102798797998220837590246510135740250
+"""Work out the first ten digits of the sum of the following one-hundred
+50-digit numbers.
+"""
+
+from io import StringIO
+
+data = """
+37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
 74324986199524741059474233309513058123726617309629
 91942213363574161572522430563301811072406154908250
@@ -99,27 +104,11 @@ class Matrix:
 77158542502016545090413245809786882778948721859617
 72107838435069186155435662884062257473692284509516
 20849603980134001723930671666823555245252804609722
-53503534226472524250874054075591789781264330331690'''
-        self.data = filter(lambda x: str.isdigit(x), self.data)
-        self.data = map(lambda x: int(x), self.data)
-        self.digits = 50
-        self.numbers = 100
+53503534226472524250874054075591789781264330331690
+"""
 
-    def val(self, num, dig):
-        return self.data[num * self.digits + dig]
 
-    def sum_col(self, col):
-        return sum([self.val(num,col) for num in range(self.numbers)])
-
-m = Matrix()
-sums = [m.sum_col(col) for col in range(m.digits)]
-sums.reverse()
-carry = 0
-vals = []
-for s in sums:
-    s += carry
-    (carry,mod) = divmod(s, 10)
-    vals.append(mod)
-vals.append(carry)
-vals.reverse()
-print (''.join(['%s' % d for d in vals[:10]])[:10])
+def main():
+    stripped = (line.strip() for line in StringIO(data))
+    total = sum(int(line) for line in stripped if line)
+    return str(total)[:10]
