@@ -1,4 +1,3 @@
-from collections import Counter
 from itertools import islice
 
 import euler.lib.util
@@ -16,12 +15,6 @@ def test_is_even_is_true_for_0():
 
 def test_is_even_is_false_for_1():
     assert not euler.lib.util.is_even(1)
-
-
-def test_prime_factors():
-    actual = euler.lib.util.prime_factors(13195)
-    expected = Counter((1, 5, 7, 13, 29))
-    assert actual == expected
 
 
 def test_factors():

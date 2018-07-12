@@ -2,6 +2,15 @@ from itertools import islice
 
 from euler.lib.primes import PrimesCalculator, PrimesReader
 import pytest
+from collections import Counter
+import euler.lib.primes
+import euler.lib.util
+
+
+def test_prime_factors():
+    actual = euler.lib.primes.prime_factors(13195)
+    expected = Counter((1, 5, 7, 13, 29))
+    assert actual == expected
 
 
 @pytest.fixture(params=[PrimesCalculator, PrimesReader])
