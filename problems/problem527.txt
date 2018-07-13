@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Colin Hughes" />
+<meta name="description" content="A website dedicated to the fascinating world of mathematics and programming" />
+<meta name="keywords" content="programming,mathematics,problems,puzzles" />
+<title>Problem 527 - Project Euler</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="stylesheet" type="text/css" href="themes/20180507/style_default.css" />
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+         inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+         displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+         processEscapes: true
+      },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+   });
+</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full,Safe"></script></head>
+
+<body>
+<div id="container">
+<div id="header" class="noprint">
+<div id="nav" class="noprint">
+<ul>
+<li><a href="about" title="About" accesskey="h">About</a></li>
+<li id="current"><a href="archives" title="Archives" accesskey="1">Archives</a></li>
+<li><a href="recent" title="Recent" accesskey="2">Recent</a></li>
+<li><a href="news" title="News" accesskey="3">News</a></li>
+<li><a href="register" title="Register" accesskey="4">Register</a></li>
+<li><a href="sign_in" title="Sign In" accesskey="5">Sign In</a></li>
+</ul>
+</div>
+
+<div id="logo" class="noprint">
+   <div>Project Euler<span>.net</span></div>
+</div>
+
+</div>
+
+<div id="info_panel"><a href="search"><img src="images/icon_search.png" alt="Search Problems" title="Search Problems" /></a><a href="rss2_euler.xml"><img src="images/icon_rss.png" alt="RSS Feed" title="RSS Feed" /></a></div>
+<div id="content">
+
+<div style="text-align:center;" class="print"><img src="images/print_page_logo.png" alt="projecteuler.net" style="border:none;" /></div>
+<h2>Randomized Binary Search</h2><div id="problem_info"><h3>Problem 527 <span style="float:right;" class="info noprint"><img src="images/icon_info.png" style="width:18px;opacity:0.7;" /><span style="left:-400px;width:450px;font-size:80%;">Published on Saturday, 26th September 2015, 04:00 pm; Solved by 525;<br />Difficulty rating: 30%</span></h3></div>
+<div class="problem_content" role="problem">
+<p>A secret integer <var>t</var> is selected at random within the range 1 ≤ <var>t</var> ≤ <var>n</var>. </p>
+
+<p>The goal is to guess the value of <var>t</var> by making repeated guesses, via integer <var>g</var>. After a guess is made, there are three possible outcomes, in which it will be revealed that either <var>g</var> &lt; <var>t</var>, <var>g</var> = <var>t</var>, or <var>g</var> &gt; <var>t</var>. Then the process can repeat as necessary.</p>
+
+<p>Normally, the number of guesses required on average can be minimized with a binary search: Given a lower bound <var>L</var> and upper bound <var>H</var> (initialized to <var>L</var> = 1 and <var>H</var> = <var>n</var>), let <var>g</var> = ⌊(<var>L</var>+<var>H</var>)/2⌋ where ⌊⋅⌋ is the integer floor function. If <var>g</var> = <var>t</var>, the process ends. Otherwise, if <var>g</var> &lt; <var>t</var>, set <var>L</var> = <var>g</var>+1, but if <var>g</var> &gt; <var>t</var> instead, set <var>H</var> = <var>g</var>−1. After setting the new bounds, the search process repeats, and ultimately ends once <var>t</var> is found. Even if <var>t</var> can be deduced without searching, assume that a search will be required anyway to confirm the value.</p>
+
+<p>Your friend Bob believes that the standard binary search is not that much better than his randomized variant: Instead of setting <var>g</var> = ⌊(<var>L</var>+<var>H</var>)/2⌋, simply let <var>g</var> be a random integer between <var>L</var> and <var>H</var>, inclusive. The rest of the algorithm is the same as the standard binary search. This new search routine will be referred to as a <i>random binary search</i>.</p>
+
+<p>Given that 1 ≤ <var>t</var> ≤ <var>n</var> for random <var>t</var>, let B(<var>n</var>) be the expected number of guesses needed to find <var>t</var> using the standard binary search, and let R(<var>n</var>) be the expected number of guesses needed to find <var>t</var> using the random binary search. For example, B(6) = 2.33333333 and R(6) = 2.71666667 when rounded to 8 decimal places.</p>
+
+<p>Find R(10<sup>10</sup>) − B(10<sup>10</sup>) rounded to 8 decimal places.</p>
+</div><br />
+<br /></div>
+
+<div id="footer" class="noprint">
+Project Euler: <a href="copyright">Copyright Information</a> | <a href="privacy">Privacy Policy</a>
+<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+   <Work rdf:about="">
+      <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/2.0/uk/" />
+   <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+   </Work>
+   <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/2.0/uk/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/><permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/><requires rdf:resource="http://web.resource.org/cc/ShareAlike"/></License></rdf:RDF> -->
+</div>
+</div>
+</body>
+</html>

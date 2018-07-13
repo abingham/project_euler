@@ -1,24 +1,6 @@
-# amicable numbers
+Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
+If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
 
-# sums[a] == b
-# sums[b] == a
+For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
 
-import euler_util
-
-sums = [0] + [sum(euler_util.proper_divisors(i)) for i in range(1,10000)]
-
-amicable = set()
-for a in range(1,10000):
-    b = sums[a]
-    if b == a:
-        continue
-    if b < 10000:
-        if sums[b] == a:
-            amicable.add(a)
-            amicable.add(b)
-    else:
-        s = sum(euler_util.proper_divisors(b))
-        if s == a:
-            amicable.add(a)
-
-# print sum(amicable)
+Evaluate the sum of all the amicable numbers under 10000.

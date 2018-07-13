@@ -1,15 +1,5 @@
-ord_base = ord('A') - 1
+Using names.txt (right click and 'Save Link/Target As...'), a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order. Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
 
-def letter_sum(name):
-    return sum([ord(letter) - ord_base for letter in name])
+For example, when the list is sorted into alphabetical order, COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. So, COLIN would obtain a score of 938 × 53 = 49714.
 
-names = []
-f = open('names.txt', 'r')
-for l in f:
-    names += [filter(lambda x: x != '"', i) for i in l.split(',')]
-names.sort()
-
-score_sum = 0
-for i in range(len(names)):
-    score_sum += ((i + 1) * letter_sum(names[i]))
-# print score_sum
+What is the total of all the name scores in the file?
