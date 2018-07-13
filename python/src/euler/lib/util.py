@@ -16,15 +16,9 @@ def is_even(x):
 
 def digits(num):
     '''
-    returns a list of the digits in num.
-    Note that this returns an empty list if num is zero
+    Returns a sequence of the digits in num.
     '''
-    rval = []
-    while num > 0:
-        (num, mod) = divmod(num, 10)
-        rval.append(mod)
-    rval.reverse()
-    return rval
+    return tuple(int(d) for d in str(num))
 
 
 def undigits(digits):
@@ -32,11 +26,7 @@ def undigits(digits):
     given a list of digits, this produces the number
     that they represent. [1,2,3] -> 123
     '''
-    sum = 0
-    for d in digits:
-        sum *= 10
-        sum += d
-    return sum
+    return int(''.join(map(str, digits)))
 
 
 def length(x):
