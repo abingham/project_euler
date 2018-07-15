@@ -132,12 +132,21 @@ def factors(n):
     Args:
         n: The number to find the factors of.
 
-    Returns: The set of integers that evenly divide into `n`.
+    Returns: The set of integers that evenly divide into `n`. This includes `n`
+        itself and 1.
     """
     pfs = tuple(prime_factors(n).elements())
     return set(reduce(operator.mul, selection, 1)
                for selection
                in selections(pfs))
+
+
+def proper_divisors(n):
+    """All factors of `n` besides `n` itself.
+    """
+    facts = factors(n)
+    facts.remove(n)
+    return facts
 
 
 def selections(seq):
