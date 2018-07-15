@@ -1,5 +1,6 @@
 import cmath
 from collections import Counter
+from collections.abc import Sequence
 from functools import reduce
 from itertools import chain, combinations, count, takewhile
 import math
@@ -348,3 +349,24 @@ def trace(meth):
         # print (meth.__name__,args,'->',rval)
         return rval
     return new_meth
+
+
+def _sorted_permutations(values):
+    assert isinstance(values, Sequence)
+
+    if len(values) == 0:
+        yield ()
+        return
+
+    for index, value in enumerate(values):
+        value_tuple = (value,)
+        subvalues = list(values)
+        del subvalues[index]
+        for sp in sorted_permutations(subvalues):
+            yield value_tuple + sp
+
+
+def sorted_permutations(values):
+    if not isinstance(values, Sequence):
+        values = tuple(values)
+    return _sorted_permutations(values)

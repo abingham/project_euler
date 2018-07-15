@@ -57,3 +57,9 @@ def test_palindrome_is_false_for_non_palindromes(s):
 def test_palindrome_is_true_for_non_palindromes(s):
     s = s + ''.join(reversed(s))
     assert util.palindrome(s)
+
+
+def test_sorted_permutations():
+    expected = [(0,1,2), (0,2,1), (1,0,2), (1,2,0), (2,0,1), (2,1,0)]
+    actual = list(util.sorted_permutations(range(3)))
+    assert actual == expected
