@@ -19,7 +19,7 @@ def pascals_triangle():
 def fibonacci():
     """Iterable of the Fibonacci sequence."""
     curr = 1
-    next = 2
+    next = 1
     while True:
         yield curr
         curr, next = next, curr + next

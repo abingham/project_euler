@@ -3,7 +3,7 @@ from euler.lib.sequences import collatz, fibonacci
 
 
 def test_fibonacci():
-    assert list(islice(fibonacci(), 10)) == [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+    assert list(islice(fibonacci(), 10)) == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
 
 def test_collatz():
