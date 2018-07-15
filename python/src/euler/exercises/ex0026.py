@@ -18,6 +18,8 @@ Find the value of d < 1000 for which 1/d contains the longest recurring cycle
 in its decimal fraction part.
 """
 
+from itertools import count, islice
+
 def unit_fraction(denominator):
     """Get the digits of a unit fraction.
 
@@ -30,34 +32,31 @@ def unit_fraction(denominator):
     Args:
         denominator: The denominator of the unit fraction.
 
-    Returns: An iterable of the digits of the unit fraction, including the
-        leading 0.
+    Returns: A tuple of (digits, cycle-length). If cycle-length is not zero,
+         then the last `cycle-length` digits in `digits` cycle forever.
     """
+    history = {}
+    result = []
     numerator = 1
-    while True:
+    for distance in count():
         if numerator < denominator:
             numerator *= 10
-            yield 0
+            result.append(0)
         else:
             d, m = divmod(numerator, denominator)
-            yield d
+            try:
+                return result, distance - history[(d, m)]
+            except KeyError:
+                pass
+
+            history[(d, m)] = distance
+
+            result.append(d)
             if m == 0:
-                return
+                return result, 0
             numerator = m * 10
-
-
-def cycle_length(denominator):
-    fractional = []
-    uf = unit_fraction(denominator)
-    next(uf)  # skip the leading 0
-    for index, f in enumerate(uf):
-        try:
-            return index - fractional.index(f)
-        except ValueError:
-            fractional.append(f)
-    return 0
 
 
 def main():
     return max(range(1, 1000),
-               key=cycle_length)
+               key=lambda x: unit_fraction(x)[1])
