@@ -14,4 +14,4 @@ def test_amicable():
 
 @pytest.mark.slow
 def test_main():
-    assert main() == 31627
+    assert main() == 31626

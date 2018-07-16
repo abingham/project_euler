@@ -22,4 +22,4 @@ def amicable(a):
 
 
 def main():
-    return sum(filter(amicable, range(10000)))
+    return sum(filter(amicable, range(1, 10000)))

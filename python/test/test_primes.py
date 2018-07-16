@@ -13,6 +13,9 @@ def test_prime_factors():
     assert actual == expected
 
 
+def test_zero_has_no_prime_factors():
+    assert not euler.lib.primes.prime_factors(0)
+
 @pytest.fixture(params=[PrimesCalculator, PrimesReader])
 def prime_generator(request):
     return request.param

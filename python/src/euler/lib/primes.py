@@ -67,6 +67,10 @@ def prime_factors(val, generator_class=Primes, include_one=True):
 
     max_prime = int(math.ceil(math.sqrt(val)))
     factors = Counter()
+
+    if val == 0:
+        return factors
+
     if include_one:
         factors[1] = 1
 

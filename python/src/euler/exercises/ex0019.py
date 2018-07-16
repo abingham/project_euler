@@ -39,6 +39,9 @@ def days_of_week():
 
 # Mapping of months to their number of days. February is special since it
 # depends on leap-years. See `days_of_month()`.
+#
+# Note: I'd prefer to code this as keyword arguments, but that isn't
+# order-preserving in python3.4/5.
 NUM_DAYS_PER_MONTH = OrderedDict((
     ('jan', 31),
     ('feb', 0),

@@ -2,12 +2,12 @@ import cmath
 from collections import Counter
 from collections.abc import Sequence
 from functools import reduce
-from itertools import chain, combinations, count, takewhile
+from itertools import chain, combinations, count
 import math
 import operator
 import time
 
-from euler.lib.primes import Primes
+from euler.lib.primes import prime_factors
 
 
 def is_even(x):
@@ -90,41 +90,6 @@ def least_common_multiple(divisors):
                   1)
 
 
-def prime_factors(val, generator_class=Primes, include_one=True):
-    '''Generates the prime factorization of val. Uses the values in primes as the
-    prime numbers (so make sure it's correct!)
-
-    Args:
-        val: The value to factor
-        generator_class: The unary callable that produces a sequence of primes
-        include_one: Whether 1 should be included in the output
-
-    Returns: A `collectons.Counter` of primes mapped to their counts in the
-        factorization.
-    '''
-
-    max_prime = int(math.ceil(math.sqrt(val)))
-    factors = Counter()
-    if include_one:
-        factors[1] = 1
-
-    for prime in takewhile(lambda p: p <= max_prime, generator_class()):
-        (d, m) = divmod(val, prime)
-        while m == 0:
-            factors[prime] += 1
-            val = d
-            (d, m) = divmod(val, prime)
-
-        if val < 2:
-            break
-
-    if val != 1:
-        # val must be a prime itself
-        factors[val] = 1
-
-    return factors
-
-
 def factors(n):
     """Get all factors of a number.
 
@@ -146,7 +111,7 @@ def proper_divisors(n):
     """All factors of `n` besides `n` itself.
     """
     facts = factors(n)
-    facts.remove(n)
+    facts.discard(n)
     return facts
 
 
