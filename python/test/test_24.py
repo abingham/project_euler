@@ -1,7 +1,6 @@
-from euler.exercises.ex0024 import main, sorted_permutations
+from euler.exercises.ex0024 import main
 import pytest
 
 
-@pytest.mark.slow
 def test_main():
-    assert main() == '5468731092'
+    assert main() == '2783915460'

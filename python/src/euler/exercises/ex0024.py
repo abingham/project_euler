@@ -9,10 +9,9 @@ What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5,
 6, 7, 8 and 9?
 """
 
-from euler.lib.util import sorted_permutations
-from more_itertools import nth
+from itertools import permutations
 
 
 def main():
-    seq = nth(sorted_permutations(range(10)), int(2e6) - 1)
-    return ''.join(map(str, seq))
+    result = sorted(permutations(range(10)))[999999]
+    return ''.join(map(str, result))
