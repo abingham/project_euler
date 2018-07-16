@@ -39,20 +39,20 @@ def days_of_week():
 
 # Mapping of months to their number of days. February is special since it
 # depends on leap-years. See `days_of_month()`.
-NUM_DAYS_PER_MONTH = OrderedDict(
-    jan=31,
-    feb=0,
-    mar=31,
-    apr=30,
-    may=31,
-    jun=30,
-    jul=31,
-    aug=31,
-    sep=30,
-    oct=31,
-    nov=30,
-    dec=31
-)
+NUM_DAYS_PER_MONTH = OrderedDict((
+    ('jan', 31),
+    ('feb', 0),
+    ('mar', 31),
+    ('apr', 30),
+    ('may', 31),
+    ('jun', 30),
+    ('jul', 31),
+    ('aug', 31),
+    ('sep', 30),
+    ('oct', 31),
+    ('nov', 30),
+    ('dec', 31)
+))
 
 
 def days_of_month(year):
