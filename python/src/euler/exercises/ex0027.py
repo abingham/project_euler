@@ -23,10 +23,10 @@ starting with n=0.
 
 from itertools import count, takewhile
 
-from euler.lib.primes import Primes
+from euler.lib.primes import PrimesCache
 from more_itertools import ilen
 
-primes = Primes()
+primes = PrimesCache()
 
 def iterate(a, b):
     for n in count():

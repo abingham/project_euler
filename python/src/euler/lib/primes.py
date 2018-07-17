@@ -57,30 +57,22 @@ class PrimesReader:
             in takewhile(lambda p: p <= c, self))
 
 
-class Primes:
-    def __init__(self, src=PrimesReader, block_size=10000):
+class PrimesCache:
+    def __init__(self, src=PrimesReader, block_size=1000):
         self._src = iter(PrimesReader())
         self._block_size = block_size
         self._cache = []
-
-    def _extend_to_index(self, index):
-        if len(self._cache) > index:
-            return
-
-        self._cache.extend(islice(self._src, self._block_size))
 
     def _extend_to_value(self, n):
         while not self._cache or self._cache[-1] < n:
             self._cache.extend(islice(self._src, self._block_size))
 
-    def __iter__(self):
-        for index in count():
-            self._extend_to_index(index)
-            yield self._cache[index]
-
     def __contains__(self, n):
         self._extend_to_value(n)
         return contains(self._cache, n)
+
+
+Primes = PrimesReader
 
 
 def prime_factors(val, generator_class=Primes, include_one=True):
