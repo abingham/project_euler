@@ -1,8 +1,10 @@
-from itertools import count, takewhile
+from itertools import count, islice, takewhile
 import math
 import pkg_resources
 from zipfile import ZipFile
 from collections import Counter
+
+from euler.lib.bisect import contains
 
 
 class PrimesCalculator:
@@ -48,8 +50,37 @@ class PrimesReader:
                         except ValueError:
                             pass
 
+    def __contains__(self, c):
+        return any(
+            c == p
+            for p
+            in takewhile(lambda p: p <= c, self))
 
-Primes = PrimesReader
+
+class Primes:
+    def __init__(self, src=PrimesReader, block_size=10000):
+        self._src = iter(PrimesReader())
+        self._block_size = block_size
+        self._cache = []
+
+    def _extend_to_index(self, index):
+        if len(self._cache) > index:
+            return
+
+        self._cache.extend(islice(self._src, self._block_size))
+
+    def _extend_to_value(self, n):
+        while not self._cache or self._cache[-1] < n:
+            self._cache.extend(islice(self._src, self._block_size))
+
+    def __iter__(self):
+        for index in count():
+            self._extend_to_index(index)
+            yield self._cache[index]
+
+    def __contains__(self, n):
+        self._extend_to_value(n)
+        return contains(self._cache, n)
 
 
 def prime_factors(val, generator_class=Primes, include_one=True):
