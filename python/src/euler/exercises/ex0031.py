@@ -1,31 +1,30 @@
-# british money combinations
+"""
+In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:
 
-def numbers(start=0, stride=1):
-    i = start
-    while True:
-        yield i
-        i += stride
+1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).
 
-coins = [200,100,50,20,10,5,2,1]
-sum = 0
+It is possible to make £2 in the following way:
 
-def use_count(c,incoming=0):
-    global sum
+1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p
 
-    if len(c) == 0:
-        return
+How many different ways can £2 be made using any number of coins?
+"""
 
-    for i in numbers():
-        local = i * c[0]
-        subtotal = local + incoming
+from more_itertools import ilen
 
-        if subtotal > 200:
-            return
-        elif subtotal < 200:
-            use_count(c[1:], subtotal)
+COINS = (200, 100, 50, 20, 10, 5, 2, 1)
+
+
+def sum_to(amount, coins=COINS):
+    for index, coin in enumerate(coins):
+        if amount - coin == 0:
+            yield (coin,)
+        elif amount - coin > 0:
+            for combo in sum_to(amount - coin, coins[index:]):
+                yield (coin,) + combo
         else:
-            sum += 1
-            return
+            yield from sum_to(amount, coins[index + 1:])
+            break
 
-use_count(coins)
-# print sum
+def main():
+    return ilen(sum_to(200))
