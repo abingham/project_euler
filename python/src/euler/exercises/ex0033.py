@@ -14,7 +14,7 @@ find the value of the denominator.
 from fractions import Fraction
 from functools import reduce
 from itertools import count, islice
-from math import gcd
+from euler.lib.compat import gcd
 from euler.lib.util import digits, undigits
 
 
