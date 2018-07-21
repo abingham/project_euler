@@ -24,8 +24,11 @@ def digits(num):
 
 def undigits(digits):
     '''
-    given a list of digits, this produces the number
+    given an iterable of digits, this produces the number
     that they represent. [1,2,3] -> 123
+
+    Raises:
+        ValueError: `digits` is empty
     '''
     return int(''.join(map(str, digits)))
 
