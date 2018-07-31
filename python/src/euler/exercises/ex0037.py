@@ -1,52 +1,49 @@
-import bisect, math
-import euler_util
+"""The number 3797 has an interesting property. Being prime itself, it is
+possible to continuously remove digits from left to right, and remain prime at
+each stage: 3797, 797, 97, and 7. Similarly we can work from right to left:
+3797, 379, 37, and 3.
 
-def rtrunc(x):
-    return x / 10
+Find the sum of the only eleven primes that are both truncatable from left to
+right and right to left.
 
-def ltrunc(x):
-    if x == 0:
-        return 0
-    p = 10 ** int(math.log10(x))
-    return x - (x / p) * p
+NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+"""
 
-def curious(x, primes):
-    # First, check right truncation
-    val = x
-    for i in range(euler_util.length(x) - 1):
-        val = rtrunc(val)
-        if euler_util.bsearch(primes, val) == -1:
-            return False
+from itertools import chain, dropwhile, islice
+from euler.lib import util
+from euler.lib.primes import is_prime, primes
 
-    # next, check left truncation
-    val = x
-    for i in range(euler_util.length(x) - 1):
-        val = ltrunc(val)
-        if euler_util.bsearch(primes, val) == -1:
-            return False
 
-    return True
+def rtrunc(n):
+    digits = util.digits(n)
+    while digits:
+        yield util.undigits(digits)
+        digits = digits[1:]
 
-def run():
-    pgen = euler_util.gen_primes()
 
-    # initialize primes list with single-digit primes...we don't consider those for rotation
-    primes = [pgen.next(), pgen.next(), pgen.next(), pgen.next()]
-    results = []
+def ltrunc(n):
+    digits = util.digits(n)
+    while digits:
+        yield util.undigits(digits)
+        digits = digits[:-1]
 
-    while len(results) < 11:
-        prime = pgen.next()
-        primes.append(prime)
-        if curious(prime, primes):
-            # print prime
-            results.append(prime)
 
-    # print sum(results)
+def is_truncatable(n):
+    return all(map(
+        is_prime,
+        chain(rtrunc(n), ltrunc(n))))
 
-def test():
-    # 3797
-    primes = [379,37,3,797,97,7]
-    primes.sort()
-    # print curious(3797, primes)
 
-run()
+def truncatables():
+    acceptable_primes = dropwhile(
+        lambda x: x <= 7,
+        primes())
+
+    return islice(
+        filter(is_truncatable,
+               acceptable_primes),
+        11)
+
+
+def main():
+    return sum(truncatables())
