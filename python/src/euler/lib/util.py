@@ -30,7 +30,10 @@ def undigits(digits):
     Raises:
         ValueError: `digits` is empty
     '''
-    return int(''.join(map(str, digits)))
+    try:
+        return reduce(lambda acc, n: acc * 10 + n, digits)
+    except TypeError:
+        raise ValueError()
 
 
 def length(x):

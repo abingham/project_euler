@@ -3,6 +3,7 @@ from itertools import islice
 from euler.lib import util
 from hypothesis import assume, given
 import hypothesis.strategies as ST
+import pytest
 
 
 def test_is_even_is_true_for_2():
@@ -63,3 +64,9 @@ def test_sorted_permutations():
     expected = [(0,1,2), (0,2,1), (1,0,2), (1,2,0), (2,0,1), (2,1,0)]
     actual = list(util.sorted_permutations(range(3)))
     assert actual == expected
+
+
+def test_undigits():
+    assert util.undigits([1,2,3]) == 123
+    with pytest.raises(ValueError):
+        util.undigits([])

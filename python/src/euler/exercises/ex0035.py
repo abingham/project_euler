@@ -1,38 +1,36 @@
-import bisect, math
-import euler_util
+"""The number, 197, is called a circular prime because all rotations of the
+digits: 197, 971, and 719, are themselves prime.
 
-primes = [i for i in euler_util.primes(1000001)]
+There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71,
+73, 79, and 97.
 
-def rotate(n):
-    d,m = divmod(n,10)
-    return d + m * (10**int(math.log10(n)))
+How many circular primes are there below one million?
+"""
 
-def is_prime(n):
-    return euler_util.bsearch(primes, n) != -1
+from more_itertools import ilen
 
-def circular(n):
-    if not is_prime(n):
-        return False
-    for i in range(math.log10(n)):
-        n = rotate(n)
-        if not is_prime(n):
-            return False
-    return True
+from euler.lib.primes import PrimesCache
+from euler.lib import util
 
-def run():
-    results = set()
-    for i in range(1000000):
-        if circular(i):
-            # print i
-            results.add(i)
 
-    # print len(results)
+primes = PrimesCache()
 
-def test():
-    #print is_prime(5)
-    #print is_prime(13)
-    #print is_prime(34)
-    #print is_prime(100)
-    pass
 
-run()
+def rotations(n):
+    digits = util.digits(n)
+    for i in range(len(digits)):
+        yield util.undigits(digits)
+        digits = digits[1:] + digits[0:1]
+
+
+def is_circular(n):
+    return all(r in primes for r in rotations(n))
+
+
+def main():
+    return ilen(n
+                for n
+                in range(2, 1000001)
+                if is_circular(n))
+
+

@@ -34,6 +34,8 @@ class PrimesCalculator:
 
 
 class PrimesReader:
+    # TODO: This should be a singleton.
+
     def __iter__(self):
         # TODO: This should be expanded to process *all* zipfiles found in the
         # "primes" directory
