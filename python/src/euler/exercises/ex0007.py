@@ -5,12 +5,12 @@ What is the 10 001st prime number?
 """
 
 
-from euler.lib.primes import Primes
+from euler.lib.primes import primes
 from more_itertools import nth
 
 
 def nth_prime(n):
-    return nth(Primes(), n - 1)
+    return nth(primes(), n - 1)
 
 
 def main():

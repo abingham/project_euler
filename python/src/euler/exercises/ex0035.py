@@ -9,11 +9,8 @@ How many circular primes are there below one million?
 
 from more_itertools import ilen
 
-from euler.lib.primes import PrimesCache
+from euler.lib.primes import is_prime
 from euler.lib import util
-
-
-primes = PrimesCache()
 
 
 def rotations(n):
@@ -24,7 +21,7 @@ def rotations(n):
 
 
 def is_circular(n):
-    return all(r in primes for r in rotations(n))
+    return all(map(is_prime, rotations(n)))
 
 
 def main():

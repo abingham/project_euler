@@ -7,61 +7,26 @@ from collections import Counter
 from euler.lib.bisect import contains
 
 
-class PrimesCalculator:
-    def __init__(self):
-        self._priors = [2]
+def primes():
+    # TODO: This should be expanded to process *all* zipfiles found in the
+    # "primes" directory
 
-    def _is_prime(self, x):
-        """
-        helper function for gen_primes. This determines if x is a prime number,
-        given the list 'priors' which is all primes less than x.
-        """
-        s = math.ceil(math.sqrt(x))
-        priors = takewhile(lambda i: i <= s, self._priors)
-        if any(x % prior == 0 for prior in priors):
-            return False
-        return True
+    filename = pkg_resources.resource_filename(
+        'euler', 'data/primes/primes1.zip')
 
-    def __iter__(self):
-        '''
-        an unbounded generator of primes starting at 2
-        '''
-        yield 2
-        for n in count(start=3, step=2):
-            if self._is_prime(n):
-                yield n
-                self._priors.append(n)
+    with ZipFile(filename, mode='r') as archive:
+        for filename in sorted(archive.namelist()):
+            with archive.open(filename) as handle:
+                for line in handle:
+                    try:
+                        yield from [int(tok) for tok in line.split()]
+                    except ValueError:
+                        pass
 
 
-class PrimesReader:
-    # TODO: This should be a singleton.
-
-    def __iter__(self):
-        # TODO: This should be expanded to process *all* zipfiles found in the
-        # "primes" directory
-
-        filename = pkg_resources.resource_filename(
-            'euler', 'data/primes/primes1.zip')
-
-        with ZipFile(filename, mode='r') as archive:
-            for filename in sorted(archive.namelist()):
-                with archive.open(filename) as handle:
-                    for line in handle:
-                        try:
-                            yield from [int(tok) for tok in line.split()]
-                        except ValueError:
-                            pass
-
-    def __contains__(self, c):
-        return any(
-            c == p
-            for p
-            in takewhile(lambda p: p <= c, self))
-
-
-class PrimesCache:
-    def __init__(self, src=PrimesReader, block_size=1000):
-        self._src = iter(PrimesReader())
+class _PrimesCache:
+    def __init__(self, block_size=1000):
+        self._src = iter(primes())
         self._block_size = block_size
         self._cache = []
 
@@ -74,16 +39,18 @@ class PrimesCache:
         return contains(self._cache, n)
 
 
-Primes = PrimesReader
+_cache = _PrimesCache()
+
+def is_prime(n):
+    return n in _cache
 
 
-def prime_factors(val, generator_class=Primes, include_one=True):
+def prime_factors(val, include_one=True):
     '''Generates the prime factorization of val. Uses the values in primes as the
     prime numbers (so make sure it's correct!)
 
     Args:
         val: The value to factor
-        generator_class: The unary callable that produces a sequence of primes
         include_one: Whether 1 should be included in the output
 
     Returns: A `collectons.Counter` of primes mapped to their counts in the
@@ -99,7 +66,7 @@ def prime_factors(val, generator_class=Primes, include_one=True):
     if include_one:
         factors[1] = 1
 
-    for prime in takewhile(lambda p: p <= max_prime, generator_class()):
+    for prime in takewhile(lambda p: p <= max_prime, primes()):
         (d, m) = divmod(val, prime)
         while m == 0:
             factors[prime] += 1

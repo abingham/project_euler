@@ -1,6 +1,6 @@
 from itertools import islice
 
-from euler.lib.primes import PrimesCalculator, PrimesReader
+from euler.lib.primes import primes
 import pytest
 from collections import Counter
 import euler.lib.primes
@@ -16,21 +16,11 @@ def test_prime_factors():
 def test_zero_has_no_prime_factors():
     assert not euler.lib.primes.prime_factors(0)
 
-@pytest.fixture(params=[PrimesCalculator, PrimesReader])
-def prime_generator(request):
-    return request.param
 
-
-def test_first_thousand_primes_correect(prime_generator):
+def test_first_thousand_primes_correct():
     expected = list(map(int, FIRST_THOUSAND_PRIMES.split()))
-    actual = list(islice(prime_generator(), 1000))
+    actual = list(islice(primes(), 1000))
     assert actual == expected
-
-
-def test_calculator_and_reader_are_equivalent():
-    c = list(islice(PrimesCalculator(), 10000))
-    r = list(islice(PrimesReader(), 10000))
-    assert c == r
 
 
 # from https://primes.utm.edu/lists/small/1000.txt

@@ -23,10 +23,8 @@ starting with n=0.
 
 from itertools import count, takewhile
 
-from euler.lib.primes import PrimesCache
+from euler.lib.primes import is_prime
 from more_itertools import ilen
-
-primes = PrimesCache()
 
 def iterate(a, b):
     for n in count():
@@ -36,7 +34,7 @@ def iterate(a, b):
 def num_primes(a, b):
     return ilen(
         takewhile(
-            lambda x: x in primes,
+            is_prime,
             iterate(a, b)))
 
 
